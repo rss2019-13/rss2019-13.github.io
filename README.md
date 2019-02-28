@@ -29,6 +29,7 @@ You will be using this template on github pages.
 If you haven't already done so, have your team make an organization on [github.mit.edu](github.mit.edu).
 Make sure your organization is named ```rss2019-#``` where "#" is your team number (not your car number!).
 
+
 Then fork this repo into your organization.
 In the settings page of the forked repo scroll down to the "Github Pages" section. Under "Source", click the dropdown menu and select "master branch" then hit save.
 You should now be able to see the template if you navigate to:
