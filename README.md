@@ -1,1 +1,79 @@
-# website_template
+# RSS Website Template
+
+This is a basic template for you to use for your team website.
+
+
+## Modifying the template
+
+You are welcome to change the design as much as you want - in fact we want you to!
+This website is pretty boring right now. Use pictures, videos, gifs and stories from your racecar experience
+to make this website pop!
+
+There are a couple constraints however. First, your lab reports remain accessible at these links:
+
+
+    https:://github.mit.edu/pages/rss2019-[TEAM_NUMBER]/website/labs/[LAB_NUMBER]
+
+
+Also for the sake of the graders, please make sure that the text remains **black on white**.
+
+
+And finally don't add too much javascript/bloat.
+We're going to need to go through a whole bunch of these websites rapidly
+and we don't want it to feel like learning modules.
+
+
+## Setting up the template
+
+You will be using this template on github pages. 
+If you haven't already done so, have your team make an organization on [github.mit.edu](github.mit.edu).
+Make sure your organization is named ```rss2019-#``` where "#" is your team number (not your car number!).
+
+Then fork this repo into your organization.
+You should now be able to see the template if you navigate to:
+
+
+    https://github.mit.edu/pages/rss2019-[TEAM_NUMBER]/website/
+
+
+Now in order to modify the template, clone your fork and read on to the next section. 
+
+
+## Using the template
+
+We've made this template as straightforward as we could to use.
+You can edit this using markdown which is the same language the lab reports are written in.
+It is very simple and there are plenty of guides online about how to use it.
+
+
+We've written a small python script that takes your markdown files and turns the into HTML files for the web.
+Each markdown file is contained in its own directory and after it is turned into HTML you will be able to view that page at:
+
+
+    https://github.mit.edu/pages/rss2019-[TEAM_NUMBER]/website/my/directory
+
+
+For example if you wanted to edit your lab 3 report you would do the following:
+
+
+    # Edit lab 3
+    vim website/labs/3/README.md
+
+
+    # Run the python script to convert to HTML
+    ./make.py
+
+
+    # Stage, commit and push your changes
+    git add website/labs/3/README.md website/labs/3/index.html
+    git commit -m "Edited lab 3"
+    git push origin master
+
+
+The template also supports $\LaTeX$ via mathjax! For inline math use single dollar signs  and for multiline math use use double dollar signs like this:
+
+$$
+\begin{align}
+  e^{i\pi} + 1 = 0
+\end{align}
+$$
