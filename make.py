@@ -48,7 +48,7 @@ def parse_readme(directory):
     f.write("<div id=\"logo_text\">")
     f.write("<h1><a href=\"" + path_to_root + "\"><span class=\"logo_colour\">")
     f.write("RSS Team " + str(TEAM_NUMBER))
-    f.write("</span></a><h1>")
+    f.write("</span></a></h1>")
     f.write("<h2>MIT Spring 2019</h2>")
     f.write("</div></div>")
     # Add a menu bar
