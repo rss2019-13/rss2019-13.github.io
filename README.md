@@ -25,9 +25,9 @@ and we don't want it to feel like learning modules.
 
 ## Setting up the template
 
-You will be using this template on github pages. 
+You will be hosting this template using [github pages](https://pages.github.com/).
 If you haven't already done so, have your team make an organization on [github.mit.edu](github.mit.edu).
-Make sure your organization is named ```rss2019-#``` where "#" is your team number (not your car number!).
+Make sure your organization is named ```rss2019-#``` where "#" is your team number (not your car number!). Do not pad the number with zeros.
 
 
 Then fork this repo into your organization.
