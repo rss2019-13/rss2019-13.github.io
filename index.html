@@ -29,7 +29,12 @@ It is very simple and there are plenty of guides online about how to use it.
 Each markdown file is contained in its own directory and after it is turned into HTML you will be able to view that page at:
 <br/><br/><pre><code>https://github.mit.edu/pages/rss2019-[TEAM_NUMBER]/website/my/directory
 </code></pre>
-<br/><br/>For example if you wanted to edit your lab 3 report you would do the following:
+<br/><br/>Running the python script requires a small library for converting markdown, so first run:
+<br/><br/><pre><code>sudo apt-get install python3-pip
+</code></pre>
+<pre><code>sudo pip3 install mistune
+</code></pre>
+<br/><br/>Then, if for example you wanted to edit your lab 3 report you would do the following:
 <br/><br/><pre><code># Edit lab 3
 </code></pre>
 <pre><code>vim website/labs/3/README.md

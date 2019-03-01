@@ -55,7 +55,14 @@ Each markdown file is contained in its own directory and after it is turned into
     https://github.mit.edu/pages/rss2019-[TEAM_NUMBER]/website/my/directory
 
 
-For example if you wanted to edit your lab 3 report you would do the following:
+Running the python script requires a small library for converting markdown, so first run:
+
+
+    sudo apt-get install python3-pip
+    sudo pip3 install mistune
+
+
+Then, if for example you wanted to edit your lab 3 report you would do the following:
 
 
     # Edit lab 3
