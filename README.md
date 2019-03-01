@@ -5,11 +5,11 @@ This is a basic template for you to use for your team website.
 
 ## Modifying the template
 
-You are welcome to change the design as much as you want - in fact we want you to!
+You can change the template design as much as you want - in fact we want you to!
 This website is pretty boring right now. Use pictures, videos, gifs and stories from your racecar experience
 to make this website pop!
 
-There are a couple constraints however. First, your lab reports remain accessible at these links:
+There are a couple constraints however. First, your lab reports must remain accessible at these links:
 
 
     https:://github.mit.edu/pages/rss2019-[TEAM_NUMBER]/website/labs/[LAB_NUMBER]
