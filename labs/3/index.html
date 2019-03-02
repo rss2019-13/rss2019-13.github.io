@@ -7,4 +7,15 @@ For Lab 3, our goal was to give our robot wall-following abilities as well as a 
 <ol>
 <li>Safety Controller</li>
 </ol>
+<h1>Wall Follower</h1>
+<h2>Scan Parser</h2>
+Our robot uses a LIDAR 2D laser scanner to detect objects in its path. We used this scan data to determine where the walls were with respect to the robot. To do this, we
+We then converted the laserscan data from polar coordinates to cartesian coordinates.
+<h2>Wall Detector</h2>
+<h2>Wall Follower Controller</h2>
+Our wall follower consists of a PD controller that allows the robot to follow a wall to its left or right while maintaining a desired distance from the wall. After detecting a wall, the  program computes the distance and angle that the robot is positioned relative to the wall. It then determines the error in distance and angle from the desired state, and multiplies each error by some gain constant and publishes the sum to the
+<h1>Safety Controller</h1>
+<h2>Scan Parser</h2>
+<h2>Object Detection</h2>
+<h2>Collision Prevention Controller</h2>
 </div></div></div></body></html>
