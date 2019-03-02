@@ -1,44 +1,18 @@
-# RSS Website Template
+# RSS Team 13
 
-This is a basic template for you to use for your team website.
+[cute lil team intro]
 
+## Meet The Team!
 
-## Modifying the template
+### Eric Boehlke
 
-You can change the template design as much as you want - in fact we want you to!
-This website is pretty boring right now. Use pictures, videos, gifs and stories from your racecar experience
-to make this website pop!
+### Yuna Gan
 
-There are a couple constraints however. First, your lab reports must remain accessible at these links:
+### Nada Hussein
 
+### Mia LaRocca
 
-    https:://github.mit.edu/pages/rss2019-[TEAM_NUMBER]/website/labs/[LAB_NUMBER]
-
-
-Also for the sake of the graders, please make sure that the text remains **black on white**.
-
-
-And finally don't add too much javascript/bloat.
-We're going to need to go through a whole bunch of these websites rapidly
-and we don't want it to feel like learning modules.
-
-
-## Setting up the template
-
-You will be hosting this template using [github pages](https://pages.github.com/).
-If you haven't already done so, have your team make an organization on [github.mit.edu](github.mit.edu).
-Make sure your organization is named ```rss2019-#``` where "#" is your team number (not your car number!). Do not pad the number with zeros.
-
-
-Then fork this repo into your organization.
-In the settings page of the forked repo scroll down to the "Github Pages" section. Under "Source", click the dropdown menu and select "master branch" then hit save.
-You should now be able to see the template if you navigate to:
-
-
-    https://github.mit.edu/pages/rss2019-[TEAM_NUMBER]/website/
-
-
-Now in order to modify the template, clone your fork and read on to the next section. 
+### Andrew Reilley
 
 
 ## Using the template
