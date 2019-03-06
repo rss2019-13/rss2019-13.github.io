@@ -1,6 +1,5 @@
 # Lab 3
-<iframe src="https://docs.google.com/presentation/d/1s6byFz1ea3ZmjSDH-Ly48D24ecHqBpBecLiBjZvpqS8/edit?usp=sharing" width="960" height="569" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-The PDF of the slides can be found [here].
+The PDF of the slides can be found [here] (https://docs.google.com/presentation/d/1s6byFz1ea3ZmjSDH-Ly48D24ecHqBpBecLiBjZvpqS8/edit?usp=sharing).
 
 #Overview and Motivations
 For Lab 3, our goal was to give our racecar the ability to follow walls at some desired distance while also using a safety protocol to prevent unavoidable collisions. In order to do this, we created a hierarchy of programs that would allow the racecar to efficiently follow walls without causing harm to itself or its surroundings. A hierarchy of programs is needed to allow the racecar to navigate on its own while giving higher priority to the racecar’s safety controller to allow the racecar to detect potential obstacles and prevent crashes. The user still maintains highest priority and can intervene in the racecar’s navigation and safety controller at any time. 
