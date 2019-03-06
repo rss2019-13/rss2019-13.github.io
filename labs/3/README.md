@@ -1,5 +1,5 @@
 # Lab 3
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQFcznMfWvz6esCwC0eGIOW0gzoU9PRd8C5C76ecpRsc0y0IkMSZnbuT8rqx0JtE4O_xf_ZyatpwM2w/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
 The PDF of the slides can be found [here](https://docs.google.com/presentation/d/e/2PACX-1vQFcznMfWvz6esCwC0eGIOW0gzoU9PRd8C5C76ecpRsc0y0IkMSZnbuT8rqx0JtE4O_xf_ZyatpwM2w/embed?start=false&loop=false&delayms=3000).
 
 #Overview and Motivations
