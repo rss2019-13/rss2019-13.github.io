@@ -40,6 +40,8 @@ The safety controller is important to make sure the robot does not crash into wa
 ### Object Detection
 As mentioned, our racecar took in LaserScan data from the LIDAR. We only wanted the safety controller's override to activate if there were obstacles directly in front of the racecar. To find these obstacles, we decided to only look at the subset of LaserScan points that were within a rectangle in front of the car. This rectangle, the safety lockout region,  has the same width as the racecar and a length dependent on the current velocity. This length scaling was necessary to allow the safety controller to have the right level of caution at different speeds, because the racecar's stopping distance is a function of its velocity. The safety controller compares all laser scan points within a certain angle range to see if they are within the safety lockout region. To avoid the controller being too sensitive to noise, we implemented a configurable threshold that the number of points inside of the lockout region must exceed before the car is stopped. Based on experimental data, we chose a value of five for this threshold.
 
+![](https://drive.google.com/file/d/18pBTRBkcVbOLTtaEQwphwP7SrstPoKqr/preview)
+
 ### Collision Prevention Controller
 When an unsafe condition is detected, the safety controller overrides the output from the wall follower by setting the robot's velocity setpoint to zero. This override will stay active as long as the laser scan data suggests that an obstacle is too close to the robot. When the obstruction is cleared, the wall follower continues operation seamlessly.
 
@@ -51,8 +53,6 @@ Throughout the development process we tested the racecar in real world condition
 We first evaluated the wall follower in a simulator to tune the control system. Here is a plot of the distance and angle errors as the robot navigates a 90 degree corner.
 
 Once we were satisfied with performance in the simulator we tested the wall follower at varying speeds and follow distances and found that the wall follower was robust until the racecar followed the wall into a corner that is smaller than the racecar's turning radius.
-
-<iframe width="560" height="315" src="https://drive.google.com/file/d/1uszK7IT50Ih12Re9hpIXc6Htdm4BAsaH/preview" frameborder="0" allowfullscreen></iframe>
 
 
 ### *Safety Controller*
