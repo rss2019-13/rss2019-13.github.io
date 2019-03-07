@@ -1,45 +1,45 @@
 <!DOCTYPE HTML><html><head><title>RSS Team 13</title><link rel="stylesheet" type="text/css" href="./css/style.css"><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$']],displayMath: [['$$','$$']],skipTags: ["script","noscript","style","textarea","code"]},TeX: {equationNumbers: {autoNumber: "AMS"}}});</script><script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script></head><body><div id="main"><div id="logo"><div id="logo_text"><h1><a href="."><span class="logo_colour">RSS Team 13</span></a></h1><h2>MIT Spring 2019</h2></div></div><div id="header"><div id="menubar"><ul id="menu"><li class="selected"><a href=".">Home</a></li><li class=""><a href="./labs">Labs</a></li><li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Video</a></li><li><a href="https://github.mit.edu/rss2019-13">Github</a></li></ul></div></div><div id="site_content"><div id="content"><h1>RSS Team 13</h1>
-<br/><br/>[cute lil team intro]
-<br/><br/><h2>Meet The Team!</h2>
-<br/><br/><h3>Eric Boehlke</h3>
-<br/><br/><h3>Yuna Gan</h3>
-<br/><br/><h3>Nada Hussein</h3>
-<br/><br/><h3>Mia LaRocca</h3>
-<br/><br/><h3>Andrew Reilley</h3>
-<br/><br/><br/><h2>Using the template</h2>
-<br/><br/>We've made this template as straightforward as we could to use.
-<br/>You can edit this using markdown which is the same language the lab reports are written in.
-<br/>It is very simple and there are plenty of guides online about how to use it.
-<br/><br/><br/>We've written a small python script that takes your markdown files and turns the into HTML files for the web.
-<br/>Each markdown file is contained in its own directory and after it is turned into HTML you will be able to view that page at:
-<br/><br/><br/><pre><code>https://github.mit.edu/pages/rss2019-[TEAM_NUMBER]/website/my/directory
+[cute lil team intro]
+<h2>Meet The Team!</h2>
+<h3>Eric Boehlke</h3>
+<h3>Yuna Gan</h3>
+<h3>Nada Hussein</h3>
+<h3>Mia LaRocca</h3>
+<h3>Andrew Reilley</h3>
+<br/><br/><h2>Using the template</h2>
+We've made this template as straightforward as we could to use.
+You can edit this using markdown which is the same language the lab reports are written in.
+It is very simple and there are plenty of guides online about how to use it.
+<br/><br/>We've written a small python script that takes your markdown files and turns the into HTML files for the web.
+Each markdown file is contained in its own directory and after it is turned into HTML you will be able to view that page at:
+<br/><br/><pre><code>https://github.mit.edu/pages/rss2019-[TEAM_NUMBER]/website/my/directory
 </code></pre>
-<br/><br/><br/>Running the python script requires a small library for converting markdown, so first run:
-<br/><br/><br/><pre><code>sudo apt-get install python3-pip
+<br/><br/>Running the python script requires a small library for converting markdown, so first run:
+<br/><br/><pre><code>sudo apt-get install python3-pip
 </code></pre>
-<br/><pre><code>sudo pip3 install mistune
+<pre><code>sudo pip3 install mistune
 </code></pre>
-<br/><br/><br/>Then, if for example you wanted to edit your lab 3 report you would do the following:
-<br/><br/><br/><pre><code># Edit lab 3
+<br/><br/>Then, if for example you wanted to edit your lab 3 report you would do the following:
+<br/><br/><pre><code># Edit lab 3
 </code></pre>
-<br/><pre><code>vim website/labs/3/README.md
+<pre><code>vim website/labs/3/README.md
 </code></pre>
-<br/><br/><br/><pre><code># Run the python script to convert to HTML
+<br/><br/><pre><code># Run the python script to convert to HTML
 </code></pre>
-<br/><pre><code>./make.py
+<pre><code>./make.py
 </code></pre>
-<br/><br/><br/><pre><code># Stage, commit and push your changes
+<br/><br/><pre><code># Stage, commit and push your changes
 </code></pre>
-<br/><pre><code>git add website/labs/3/README.md website/labs/3/index.html
+<pre><code>git add website/labs/3/README.md website/labs/3/index.html
 </code></pre>
-<br/><pre><code>git commit -m "Edited lab 3"
+<pre><code>git commit -m "Edited lab 3"
 </code></pre>
-<br/><pre><code>git push origin master
+<pre><code>git push origin master
 </code></pre>
-<br/><br/><br/>The template also supports $\LaTeX$ via mathjax! For inline math use single dollar signs  and for multiline math use use double dollar signs like this:
-<br/><br/>$$
-<br/>\begin{align}
-<br/>e^{i\pi} + 1 = 0
-<br/>\end{align}
-<br/>$$
-<br/></div></div></div></body></html>
+<br/><br/>The template also supports $\LaTeX$ via mathjax! For inline math use single dollar signs  and for multiline math use use double dollar signs like this:
+$$
+\begin{align}
+e^{i\pi} + 1 = 0
+\end{align}
+$$
+</div></div></div></body></html>
