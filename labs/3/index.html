@@ -38,7 +38,7 @@ Throughout the development process we tested the racecar in real world condition
 <h3><em>Wall Follower</em></h3>
 We first evaluated the wall follower in a simulator to tune the control system. Here is a plot of the distance and angle errors as the robot navigates a 90 degree corner.
 Once we were satisfied with performance in the simulator we tested the wall follower at varying speeds and follow distances and found that the wall follower was robust until the racecar followed the wall into a corner that is smaller than the racecar's turning radius.
-<img src="https://drive.google.com/open?id=1uszK7IT50Ih12Re9hpIXc6Htdm4BAsaH" alt="alt text" title="Wall Follower Simulator">
+![Wall Follower Simulator("<a href="https://drive.google.com/file/d/1uszK7IT50Ih12Re9hpIXc6Htdm4BAsaH/preview">https://drive.google.com/file/d/1uszK7IT50Ih12Re9hpIXc6Htdm4BAsaH/preview</a>")
 <br/><br/><h3><em>Safety Controller</em></h3>
 The safety controller was difficult to test because our wall follower is very good at navigating the racecar around obstacles. However, the safety controller was still needed for smaller obstructions and obstacles suddenly getting in the way. Below are examples of the safety controller in action. As you can see in the second video, as soon as the obstacle leaves the lockout region, the racecar continues following the wall.
 <h2><strong>Lessons Learned</strong></h2>
