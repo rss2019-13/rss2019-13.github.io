@@ -52,7 +52,7 @@ We first evaluated the wall follower in a simulator to tune the control system. 
 
 Once we were satisfied with performance in the simulator we tested the wall follower at varying speeds and follow distances and found that the wall follower was robust until the racecar followed the wall into a corner that is smaller than the racecar's turning radius.
 
-![Wall Follower Simulator("https://drive.google.com/file/d/1uszK7IT50Ih12Re9hpIXc6Htdm4BAsaH/preview")
+![Wall Follower Simulator](https://drive.google.com/file/d/1uszK7IT50Ih12Re9hpIXc6Htdm4BAsaH/preview)
 
 
 ### *Safety Controller*
