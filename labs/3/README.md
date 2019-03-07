@@ -40,14 +40,12 @@ The safety controller is important to make sure the robot does not crash into wa
 ### Object Detection
 As mentioned, our racecar took in LaserScan data from the LIDAR. We only wanted the safety controller's override to activate if there were obstacles directly in front of the racecar. To find these obstacles, we decided to only look at the subset of LaserScan points that were within a rectangle in front of the car. This rectangle, the safety lockout region,  has the same width as the racecar and a length dependent on the current velocity. This length scaling was necessary to allow the safety controller to have the right level of caution at different speeds, because the racecar's stopping distance is a function of its velocity. The safety controller compares all laser scan points within a certain angle range to see if they are within the safety lockout region. To avoid the controller being too sensitive to noise, we implemented a configurable threshold that the number of points inside of the lockout region must exceed before the car is stopped. Based on experimental data, we chose a value of five for this threshold.
 
-<img src="https://drive.google.com/uc?export=view&id=18pBTRBkcVbOLTtaEQwphwP7SrstPoKqr" alt="drawing" width="200">
-
-![alt text](https://drive.google.com/uc?export=view&id=18pBTRBkcVbOLTtaEQwphwP7SrstPoKqr =500x430)
+![Safe Situation](https://drive.google.com/uc?export=view&id=18pBTRBkcVbOLTtaEQwphwP7SrstPoKqr)
 **Figure 4A: A safe situation**
 When fewer points than the threshold amount are in the safety lockout region, the safety controller allows the wall follower to continue normal operation.
 
 
-![alt text](https://drive.google.com/uc?export=view&id=1JCIxiIrqB_ZFV5EQDCWhbXY_RUs8YTNk =500x430)
+![Unsafe Situation](https://drive.google.com/uc?export=view&id=1JCIxiIrqB_ZFV5EQDCWhbXY_RUs8YTNk)
 **Figure 4B: An unsafe situation**
 When fewer points than the threshold amount are in the safety lockout region, the safety controller allows the wall follower to continue normal operation.
 
@@ -61,11 +59,28 @@ Throughout the development process we tested the racecar in real world condition
 ### *Wall Follower*
 We first evaluated the wall follower in a simulator to tune the control system. Here is a plot of the distance and angle errors as the robot navigates a 90 degree corner.
 
+![Wall Follower Simulation](https://drive.google.com/uc?export=view&id=151rwQp99hauEfwmiuvHeWpgRLGADLnb2)
+**Figure 5: Racecar navigating 90 degree turn in simulation**
+A simulation of the robot navigating a corner, demonstrating how the robot detects the wall.
+
 Once we were satisfied with performance in the simulator we tested the wall follower at varying speeds and follow distances and found that the wall follower was robust until the racecar followed the wall into a corner that is smaller than the racecar's turning radius.
+
+![Wall Follower](https://drive.google.com/uc?export=view&id=1uszK7IT50Ih12Re9hpIXc6Htdm4BAsaH)
+**Figure 5: Wall Following in the Stata Basement**
+Here the robot navigates its way around a tricky section of the stata basement demonstrating its ability to follow turns in both directions with respect to the robot.
+
 
 
 ### *Safety Controller*
 The safety controller was difficult to test because our wall follower is very good at navigating the racecar around obstacles. However, the safety controller was still needed for smaller obstructions and obstacles suddenly getting in the way. Below are examples of the safety controller in action. As you can see in the second video, as soon as the obstacle leaves the lockout region, the racecar continues following the wall.
+
+![Sudden Obstacle](https://drive.google.com/uc?export=view&id=1Tkm7g4VVzk5HKwvzR38WCib1oQ7BXAXg)
+**Figure 6A: Racecar Stopping for Feet (Small Obstacle)**
+Here the racecar stops for Nada’s feet, despite them being a small obstacle the racecar is still able to recognize the obstruction.
+
+![Sudden Obstacle](https://drive.google.com/uc?export=view&id=1IwhcK9tdZupGrTsqhb97D4yDe4mR9aGM)
+**Figure 6B: Racecar Stopping for Lid (Sudden Obstacle)**
+Here the racecar stops when a lid is placed in front of it. After the lid moves out of the way, the racecar continues.
 
 ## **Lessons Learned**
 To ensure more efficient group work, rigorous testing of edge cases and better delegation of tasks are needed. The initial approach we took to detecting obstacles in a collision zone was to detect LaserScan points in a triangular area in front of the racecar. However, we found that this method did not cover all cases of potential obstacles, since points directly in front of the left or right edges of the racecar would not be detected and the racecar would collide into those undetected obstacles. We then changed our approach to identifying obstacles in a rectangular area in front of the racecar, which works well. 
