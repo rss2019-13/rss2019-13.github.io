@@ -76,7 +76,7 @@ def parse_readme(directory):
         prev_markdown = "."
         for line in readme_f:
             if "<img" not in str(line):
-                markdown = str(mistune.markdown(line))
+                markdown = str(mistune.markdown(line)) + "<br/>"
             else:
                 markdown = str(line)
             # Get rid of paragraph markers
