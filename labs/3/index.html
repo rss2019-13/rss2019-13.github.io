@@ -33,7 +33,7 @@ As mentioned, our racecar took in LaserScan data from the LIDAR. We only wanted 
 <br/><br/><img src="https://drive.google.com/uc?export=view&id=18pBTRBkcVbOLTtaEQwphwP7SrstPoKqr" alt="Safe Situation" height="430" width="500">
 <br/><strong>Figure 4A: A safe situation</strong>
 When fewer points than the threshold amount are in the safety lockout region, the safety controller allows the wall follower to continue normal operation.
-<img src="https://drive.google.com/uc?export=view&id=1JCIxiIrqB_ZFV5EQDCWhbXY_RUs8YTNk" alt="Unsafe Situation" height="430" width="500">
+<br/><br/><img src="https://drive.google.com/uc?export=view&id=1JCIxiIrqB_ZFV5EQDCWhbXY_RUs8YTNk" alt="Unsafe Situation" height="430" width="500">
 <br/><strong>Figure 4B: An unsafe situation</strong>
 When fewer points than the threshold amount are in the safety lockout region, the safety controller allows the wall follower to continue normal operation.
 <h3>Collision Prevention Controller</h3>
@@ -43,8 +43,8 @@ When an unsafe condition is detected, the safety controller overrides the output
 Throughout the development process we tested the racecar in real world conditions.
 <h3><em>Wall Follower</em></h3>
 We first evaluated the wall follower in a simulator to tune the control system. Here is a plot of the distance and angle errors as the robot navigates a 90 degree corner.
-<img src="https://drive.google.com/uc?export=view&amp;id=151rwQp99hauEfwmiuvHeWpgRLGADLnb2" alt="Wall Follower Simulation">
-<strong>Figure 5: Racecar navigating 90 degree turn in simulation</strong>
+<video width="500" height="430" controls> <source src="https://drive.google.com/uc?export=view&id=151rwQp99hauEfwmiuvHeWpgRLGADLnb2" type="video/mp4">Your browser does not support the video tag.</video>
+<br/><strong>Figure 5: Racecar navigating 90 degree turn in simulation</strong>
 A simulation of the robot navigating a corner, demonstrating how the robot detects the wall.
 Once we were satisfied with performance in the simulator we tested the wall follower at varying speeds and follow distances and found that the wall follower was robust until the racecar followed the wall into a corner that is smaller than the racecar's turning radius.
 <img src="https://drive.google.com/uc?export=view&amp;id=1uszK7IT50Ih12Re9hpIXc6Htdm4BAsaH" alt="Wall Follower">

@@ -45,6 +45,7 @@ As mentioned, our racecar took in LaserScan data from the LIDAR. We only wanted 
 **Figure 4A: A safe situation**
 When fewer points than the threshold amount are in the safety lockout region, the safety controller allows the wall follower to continue normal operation.
 
+
 <img src="https://drive.google.com/uc?export=view&id=1JCIxiIrqB_ZFV5EQDCWhbXY_RUs8YTNk" alt="Unsafe Situation" height="430" width="500">
 **Figure 4B: An unsafe situation**
 When fewer points than the threshold amount are in the safety lockout region, the safety controller allows the wall follower to continue normal operation.
@@ -59,7 +60,7 @@ Throughout the development process we tested the racecar in real world condition
 ### *Wall Follower*
 We first evaluated the wall follower in a simulator to tune the control system. Here is a plot of the distance and angle errors as the robot navigates a 90 degree corner.
 
-![Wall Follower Simulation](https://drive.google.com/uc?export=view&id=151rwQp99hauEfwmiuvHeWpgRLGADLnb2)
+<video width="500" height="430" controls> <source src="https://drive.google.com/uc?export=view&id=151rwQp99hauEfwmiuvHeWpgRLGADLnb2" type="video/mp4">Your browser does not support the video tag.</video>
 **Figure 5: Racecar navigating 90 degree turn in simulation**
 A simulation of the robot navigating a corner, demonstrating how the robot detects the wall.
 
