@@ -42,9 +42,7 @@ As mentioned, our racecar took in LaserScan data from the LIDAR. We only wanted 
 
 
 
-<img src="https://drive.google.com/uc?export=view&id=18pBTRBkcVbOLTtaEQwphwP7SrstPoKqr" alt="simulation" height="500" width="430">
-
-![Safe Situation](https://drive.google.com/uc?export=view&id=18pBTRBkcVbOLTtaEQwphwP7SrstPoKqr)
+<img src="https://drive.google.com/uc?export=view&id=18pBTRBkcVbOLTtaEQwphwP7SrstPoKqr" alt="Unsafe Situation" height="500" width="430">
 **Figure 4A: A safe situation**
 When fewer points than the threshold amount are in the safety lockout region, the safety controller allows the wall follower to continue normal operation.
 
