@@ -41,13 +41,11 @@ The safety controller is important to make sure the robot does not crash into wa
 As mentioned, our racecar took in LaserScan data from the LIDAR. We only wanted the safety controller's override to activate if there were obstacles directly in front of the racecar. To find these obstacles, we decided to only look at the subset of LaserScan points that were within a rectangle in front of the car. This rectangle, the safety lockout region,  has the same width as the racecar and a length dependent on the current velocity. This length scaling was necessary to allow the safety controller to have the right level of caution at different speeds, because the racecar's stopping distance is a function of its velocity. The safety controller compares all laser scan points within a certain angle range to see if they are within the safety lockout region. To avoid the controller being too sensitive to noise, we implemented a configurable threshold that the number of points inside of the lockout region must exceed before the car is stopped. Based on experimental data, we chose a value of five for this threshold.
 
 
-
-<img src="https://drive.google.com/uc?export=view&id=18pBTRBkcVbOLTtaEQwphwP7SrstPoKqr" alt="Unsafe Situation" height="500" width="430">
+<img src="https://drive.google.com/uc?export=view&id=18pBTRBkcVbOLTtaEQwphwP7SrstPoKqr" alt="Unsafe Situation" height="430" width="500">
 **Figure 4A: A safe situation**
 When fewer points than the threshold amount are in the safety lockout region, the safety controller allows the wall follower to continue normal operation.
 
-
-![Unsafe Situation](https://drive.google.com/uc?export=view&id=1JCIxiIrqB_ZFV5EQDCWhbXY_RUs8YTNk)
+<img src="https://drive.google.com/uc?export=view&id=1JCIxiIrqB_ZFV5EQDCWhbXY_RUs8YTNk" alt="Unsafe Situation" height="430" width="500">
 **Figure 4B: An unsafe situation**
 When fewer points than the threshold amount are in the safety lockout region, the safety controller allows the wall follower to continue normal operation.
 
