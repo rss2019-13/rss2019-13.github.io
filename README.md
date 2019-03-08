@@ -5,14 +5,29 @@
 ## Meet The Team!
 
 ### Eric Boehlke
+<img src="https://drive.google.com/file/d/1zHgYd1Cu5A9lYqZvU-M3umE_TS851uiB/preview" alt="Eric" height="100" width="74">
+**Course:** 6-2
+**Year:** 2020
 
 ### Yuna Gan
+<img src="https://drive.google.com/file/d/12f5LioGw4vNExfYozHTHZbiuAkTZoz0vpreview" alt="Yuna" height="100" width="74">
+**Course:** 6-3
+**Year:** 2020
 
 ### Nada Hussein
+<img src="https://drive.google.com/file/d/1Hj7_pHrafliZA2RStTCo9KAMGFc6WUnG/preview" alt="Nada" height="100" width="74">
+**Course:** 6-2
+**Year:** 2020
 
 ### Mia LaRocca
+<img src="https://drive.google.com/file/d/1IS6WAVeytnXESOZVFqu0P_aEtFHFLdt1preview" alt="Mia" height="100" width="74">
+**Course:** 16
+**Year:** 2020
 
 ### Andrew Reilley
+<img src="https://drive.google.com/file/d/1OHYAbxKBRf0JzH6WcKUTVxda-Y2fEkdipreview" alt="Andrew" height="100" width="74">
+**Course:** 6-2
+**Year:** 2019
 
 
 ## Using the template
