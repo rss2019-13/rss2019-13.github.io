@@ -5,7 +5,7 @@ Our briefing slides can be found [here](https://docs.google.com/presentation/d/e
 
 ***
 
-## **Overview and Motivations**
+## **Overview and Motivations (Yuna)**
 For Lab 3, our goal was to give our racecar the ability to follow walls at some desired distance while also using a safety protocol to prevent unavoidable collisions. In order to do this, we created a hierarchy of programs that would allow the racecar to efficiently follow walls without causing harm to itself or its surroundings. This structure is needed to allow the racecar to navigate on its own while giving higher priority to the safety controller, which allows the racecar to detect potential obstacles and prevent crashes. The user still maintains highest priority and can intervene in the racecar's navigation and safety controller at any time. 
 
 The racecar is able to successfully navigate a path in its environment by following a wall and stopping when our program deems necessary. The wall follower we implemented is able to smoothly follow a chosen side of wall, navigate corners, and go around any foreseen obstacles while maintaining a given desired distance away from the wall. When the racecar detects an obstacle within a rectangular area in front of itself, given the speed that the racecar is travelling at and the distance to the obstacle, it has the option to either stop immediately or go around the obstacle. If the racecar is travelling too quickly or is too close to the obstacle to find a way around it, the racecar will come to a stop until the obstacle is removed. Otherwise, the racecar will go around the obstacle, if an viable alternative path is detected. For navigational purposes, it seems wise to have the racecar behave thus so, since the aim is to navigate safely while avoiding crashes. 
@@ -13,9 +13,8 @@ The racecar is able to successfully navigate a path in its environment by follow
 
 ***
 
-## **Proposed Approach**
-
-## *Scan Parser*
+## **Proposed Approach (Nada/Andrew)** 
+## *Scan Parser (Nada)*
 Our racecar uses a LIDAR 2D laser scanner to collect data about its surroundings. This is given to the car in a series of polar coordinates, which represent the distance to the nearest obstacle at any given angle in the sweep.
 
 
@@ -26,7 +25,7 @@ The LIDAR helps the racecrar see obstacles, mapping them as points in the robot'
 
 We looked at specific subsets of this data that varied based on the task we were looking to accomplish. Once this data was filtered, we converted the LIDAR data from polar coordinates to cartesian coordinates to make the points easier to work with.
 
-## *Wall Follower*
+## *Wall Follower (Nada)*
 Our wall follower worked in three parts. First, we used the laserscan data to determine where the walls were relative to the robot. From here we determined the error of the car's position relative to its desired position from the closest wall, which can be set by giving the program different parameters. Finally, we implemented a controller that changed the turning angle of the car in order to direct it back to its desired position.
 
 ### Wall Detector
@@ -50,7 +49,7 @@ Distance error was calculated by subtracting our measured distance, d, from our 
 ### Wall Follower Controller
 Using our error values, we implemented a PD controller that allows the racecar to adjust its turning angle based on its previous error from the desired position. We multiplied each error by some gain constant and published the sum to the Ackermann Drive message of the racecar as the turning angle. The racecar then adjusted its wheels to follow this turning angle, and from here out feedback cycle would start again, measuring the new errors from the LIDAR data and computing a new turning angle. 
 
-## *Safety Controller*
+## *Safety Controller (Andrew)*
 The safety controller is important to make sure the robot does not crash into walls while driving autonomously. It has to be able to protect the racecar from running itself into objects, but not interrupt the wall follower when there is no danger. To accomplish this we created a controller that triggers only if there is an object directly in front of the car.
 
 ### Object Detection
@@ -72,7 +71,7 @@ When an unsafe condition is detected, the safety controller overrides the output
 
 ***
 
-## **Experimental Evaluation**
+## **Experimental Evaluation (Mia)**
 Throughout the development process we tested the racecar in real world conditions.
 ### *Wall Follower*
 We first evaluated the wall follower in a simulator to tune the control system. Here is a plot of the distance and angle errors as the robot navigates a 90 degree corner.
@@ -113,10 +112,12 @@ Here the racecar stops for Nada’s feet, despite them being a small obstacle th
 **Figure 6B: Racecar Stopping for Lid (Sudden Obstacle)**
 Here the racecar stops when a lid is placed in front of it. After the lid moves out of the way, the racecar continues.
 
-## **Lessons Learned**
+## **Lessons Learned (Eric)**
 To ensure more efficient group work, rigorous testing of edge cases and better delegation of tasks are needed. The initial approach we took to detecting obstacles in a collision zone was to detect LaserScan points in a triangular area in front of the racecar. However, we found that this method did not cover all cases of potential obstacles, since points directly in front of the left or right edges of the racecar would not be detected and the racecar would collide into those undetected obstacles. We then changed our approach to identifying obstacles in a rectangular area in front of the racecar, which works well. 
 
+
 The new approach of using a rectangular collision area caused the racecar to have delayed reactions to obstacles, which was solved by only processing a subset of LaserScan messages received. The computation required by the new approach is slower, and the racecar is unable to process messages as quickly as they are received. As older LaserScan messages were being dequeued before they could be processed, the racecar had delayed reactions to obstacles faced and could not stop in time. Our solution to this problem was to process one in every five LaserScan messages received, which still allowed the racecar to detect new obstacles quickly enough and process the LaserScan messages to react appropriately. 
+
 
 To ensure that future labs take less time and group work is more efficient, better delegation of tasks is needed. Group work time would be better used merging different working parts of a program rather than tackling a single problem at a time as a group.
 
