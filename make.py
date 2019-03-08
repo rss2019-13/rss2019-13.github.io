@@ -75,7 +75,7 @@ def parse_readme(directory):
     with open(readme, 'r') as readme_f:
         prev_markdown = "."
         for line in readme_f:
-            if "<img" not in str(line) and "<video" not in str(line):
+            if "<img" not in str(line) and "<video" not in str(line) and "<iframe" not in str(line):
                 markdown = str(mistune.markdown(line))
             else:
                 markdown = str(line) + "<br/>"

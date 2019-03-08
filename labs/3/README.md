@@ -60,29 +60,28 @@ Throughout the development process we tested the racecar in real world condition
 ### *Wall Follower*
 We first evaluated the wall follower in a simulator to tune the control system. Here is a plot of the distance and angle errors as the robot navigates a 90 degree corner.
 
-<video width="500" height="430" controls> <source src="https://drive.google.com/uc?export=view&id=151rwQp99hauEfwmiuvHeWpgRLGADLnb2 type="video/mp4">Your browser does not support the video tag.</video>
+<iframe src="https://drive.google.com/file/d/151rwQp99hauEfwmiuvHeWpgRLGADLnb2/preview" width="640" height="480"></iframe>
 
 **Figure 5A: Racecar navigating 90 degree turn in simulation**
 A simulation of the robot navigating a corner, demonstrating how the robot detects the wall.
 
 Once we were satisfied with performance in the simulator we tested the wall follower at varying speeds and follow distances and found that the wall follower was robust until the racecar followed the wall into a corner that is smaller than the racecar's turning radius.
 
-<video width="500" height="430" controls> <source src="https://drive.google.com/uc?export=view&id=1uszK7IT50Ih12Re9hpIXc6Htdm4BAsaH type="video/mp4">Your browser does not support the video tag.</video>
+<iframe src="https://drive.google.com/file/d/1uszK7IT50Ih12Re9hpIXc6Htdm4BAsaH/preview" width="640" height="480"></iframe>
 
 **Figure 5B: Wall Following in the Stata Basement**
 Here the robot navigates its way around a tricky section of the stata basement demonstrating its ability to follow turns in both directions with respect to the robot.
 
 
-
 ### *Safety Controller*
 The safety controller was difficult to test because our wall follower is very good at navigating the racecar around obstacles. However, the safety controller was still needed for smaller obstructions and obstacles suddenly getting in the way. Below are examples of the safety controller in action. As you can see in the second video, as soon as the obstacle leaves the lockout region, the racecar continues following the wall.
 
-<video width="500" height="430" controls> <source src="https://drive.google.com/uc?export=view&id=1Tkm7g4VVzk5HKwvzR38WCib1oQ7BXAXg type="video/mp4">Your browser does not support the video tag.</video>
+<iframe src="https://drive.google.com/file/d/1Tkm7g4VVzk5HKwvzR38WCib1oQ7BXAXg/preview" width="640" height="480"></iframe>
 
 **Figure 6A: Racecar Stopping for Feet (Small Obstacle)**
 Here the racecar stops for Nada’s feet, despite them being a small obstacle the racecar is still able to recognize the obstruction.
 
-<video width="500" height="430" controls> <source src="https://drive.google.com/uc?export=view&id=1IwhcK9tdZupGrTsqhb97D4yDe4mR9aGM type="video/mp4">Your browser does not support the video tag.</video>
+<iframe src="https://drive.google.com/file/d/1IwhcK9tdZupGrTsqhb97D4yDe4mR9aGM/preview" width="640" height="480"></iframe>
 
 **Figure 6B: Racecar Stopping for Lid (Sudden Obstacle)**
 Here the racecar stops when a lid is placed in front of it. After the lid moves out of the way, the racecar continues.
