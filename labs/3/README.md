@@ -85,7 +85,7 @@ A simulation of the robot navigating a corner, demonstrating how the robot detec
 Once we were satisfied with performance in the simulator we tested the wall follower at varying speeds and follow distances and found that the wall follower was robust until the racecar followed the wall into a corner that is smaller than the racecar's turning radius.
 
 
-<img src="https://drive.google.com/uc?export=view&id=dGoW3Jy84AZovz1FIT_sr45QQewslqBN" alt="Unsafe Situation" height="350" width="600">
+<img src="https://drive.google.com/uc?export=view&id=1dGoW3Jy84AZovz1FIT_sr45QQewslqBN" alt="Unsafe Situation" height="350" width="600">
 **Figure 6A: Error in a 90 degree turn**
 This is the error between the detected wall and the robot as it navigates the turn above. There is a jump in both distance error and angle error while the robot is turning that gets resolved quickly once it completes the turn.
 
