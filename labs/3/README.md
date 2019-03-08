@@ -30,7 +30,6 @@ Our wall follower worked in three parts. First, we used the laserscan data to de
 <br>
 **Wall Detector**
 <br>
-
 Once we received the LaserScan data from the LIDAR, we filtered out points that were not relevant. In the wall-following situation, this meant that we only looked at points to the left and in front of the racecar if it was following the left wall, and only looked at points to the right and in front of the racecar if it was following the right wall. From here, we were able to use a simple linear regression to consider all the LaserScan points on the correct side of the robot, and create a linear model for the wall that represented its location relative to the robot.
 
 
@@ -40,9 +39,7 @@ Here the racecar has published a red line to mark the location of the wall based
 
 <br>
 **Error Measurement**
-
 <br>
-
 After locating the wall, we needed to know two things: the distance the robot was positioned from the wall, and the angle it was rotated relative to the wall. We used trigonometry and algebra to find these values. From here we calculated the error values by subtracting the measured distances and angles from the desired distance and angle, in which the angle we want is parallel to the detected wall.
 
 
@@ -52,9 +49,7 @@ Distance error was calculated by subtracting our measured distance, d, from our 
 
 <br>
 **Wall Follower Controller**
-
 <br>
-
 Using our error values, we implemented a PD controller that allows the racecar to adjust its turning angle based on its previous error from the desired position. We multiplied each error by some gain constant and published the sum to the Ackermann Drive message of the racecar as the turning angle. The racecar then adjusted its wheels to follow this turning angle, and from here out feedback cycle would start again, measuring the new errors from the LIDAR data and computing a new turning angle. 
 
 ## *Safety Controller (Andrew)*
@@ -62,9 +57,7 @@ The safety controller is important to make sure the robot does not crash into wa
 
 <br>
 **Object Detection**
-
 <br>
-
 As mentioned, our racecar took in LaserScan data from the LIDAR. We only wanted the safety controller's override to activate if there were obstacles directly in front of the racecar. To find these obstacles, we decided to only look at the subset of LaserScan points that were within a rectangle in front of the car. This rectangle, the safety lockout region,  has the same width as the racecar and a length dependent on the current velocity. This length scaling was necessary to allow the safety controller to have the right level of caution at different speeds, because the racecar's stopping distance is a function of its velocity. The safety controller compares all laser scan points within a certain angle range to see if they are within the safety lockout region. To avoid the controller being too sensitive to noise, we implemented a configurable threshold that the number of points inside of the lockout region must exceed before the car is stopped. Based on experimental data, we chose a value of five for this threshold.
 
 
@@ -79,9 +72,7 @@ When fewer points than the threshold amount are in the safety lockout region, th
 
 <br>
 **Collision Prevention Controller**
-
 <br>
-
 When an unsafe condition is detected, the safety controller overrides the output from the wall follower by setting the robot's velocity setpoint to zero. This override will stay active as long as the laser scan data suggests that an obstacle is too close to the robot. When the obstruction is cleared, the wall follower continues operation seamlessly.
 
 ***
