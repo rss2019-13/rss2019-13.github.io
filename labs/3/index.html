@@ -8,7 +8,7 @@ The racecar is able to successfully navigate a path in its environment by follow
 <h2><strong>Proposed Approach (Nada/Andrew)</strong></h2>
 <h2><em>Scan Parser (Nada)</em></h2>
 Our racecar uses a LIDAR 2D laser scanner to collect data about its surroundings. This is given to the car in a series of polar coordinates, which represent the distance to the nearest obstacle at any given angle in the sweep.
-<br/><br/><iframe src="https://drive.google.com/file/d/1muZdvgSLB9RgKc6RV89q59ER8Md_1_Ah/preview" width="640" height="480"></iframe> 
+<br/><br/><img src="https://drive.google.com/uc?export=view&id=1muZdvgSLB9RgKc6RV89q59ER8Md_1_Ah" alt="marker" height="430" width="600">
 <br/><strong>Figure 1: Racecar surroundings vs. LIDAR readings</strong>
 The LIDAR helps the racecrar see obstacles, mapping them as points in the robot's surroundings. Here, the car is able to detect Nada's feet and visualize them as the points circled in red.
 <br/><br/>We looked at specific subsets of this data that varied based on the task we were looking to accomplish. Once this data was filtered, we converted the LIDAR data from polar coordinates to cartesian coordinates to make the points easier to work with.
@@ -16,12 +16,12 @@ The LIDAR helps the racecrar see obstacles, mapping them as points in the robot'
 Our wall follower worked in three parts. First, we used the laserscan data to determine where the walls were relative to the robot. From here we determined the error of the car's position relative to its desired position from the closest wall, which can be set by giving the program different parameters. Finally, we implemented a controller that changed the turning angle of the car in order to direct it back to its desired position.
 <h3>Wall Detector</h3>
 Once we received the LaserScan data from the LIDAR, we filtered out points that were not relevant. In the wall-following situation, this meant that we only looked at points to the left and in front of the racecar if it was following the left wall, and only looked at points to the right and in front of the racecar if it was following the right wall. From here, we were able to use a simple linear regression to consider all the LaserScan points on the correct side of the robot, and create a linear model for the wall that represented its location relative to the robot.
-<br/><br/><img src="https://drive.google.com/uc?export=view&id=1JzJuRfkzzQDQmDS3wRuRt6FqI9PWZYxf" alt="marker" height="430" width="500">
+<br/><br/><img src="https://drive.google.com/uc?export=view&id=1JzJuRfkzzQDQmDS3wRuRt6FqI9PWZYxf" alt="marker" height="430" width="600">
 <br/><strong>Figure 2: Racecar's wall marker</strong>
 Here the racecar has published a red line to mark the location of the wall based on a linear regression of the LIDAR points.
 <br/><br/><h3>Error Measurement</h3>
 After locating the wall, we needed to know two things: the distance the robot was positioned from the wall, and the angle it was rotated relative to the wall. We used trigonometry and algebra to find these values. From here we calculated the error values by subtracting the measured distances and angles from the desired distance and angle, in which the angle we want is parallel to the detected wall.
-<br/><br/><img src="https://drive.google.com/uc?export=view&id=1hiHxr4mU3RPxGgT7zNPla2e159NOhu2X" alt="error" height="430" width="500">
+<br/><br/><img src="https://drive.google.com/uc?export=view&id=1hiHxr4mU3RPxGgT7zNPla2e159NOhu2X" alt="error" height="430" width="600">
 <br/><strong>Figure 3: Calculating distance and angle error</strong>
 Distance error was calculated by subtracting our measured distance, d, from our desired distance, shown here at the dotted line. Our angle error was calculated by finding theta, shown here as the angle between our car's forward facing direction and the wall.
 <br/><br/><h3>Wall Follower Controller</h3>

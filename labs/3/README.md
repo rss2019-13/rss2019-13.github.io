@@ -18,7 +18,7 @@ The racecar is able to successfully navigate a path in its environment by follow
 Our racecar uses a LIDAR 2D laser scanner to collect data about its surroundings. This is given to the car in a series of polar coordinates, which represent the distance to the nearest obstacle at any given angle in the sweep.
 
 
-<iframe src="https://drive.google.com/file/d/1muZdvgSLB9RgKc6RV89q59ER8Md_1_Ah/preview" width="640" height="480"></iframe> 
+<img src="https://drive.google.com/uc?export=view&id=1muZdvgSLB9RgKc6RV89q59ER8Md_1_Ah" alt="marker" height="430" width="600">
 **Figure 1: Racecar surroundings vs. LIDAR readings**
 The LIDAR helps the racecrar see obstacles, mapping them as points in the robot's surroundings. Here, the car is able to detect Nada's feet and visualize them as the points circled in red.
 
@@ -32,7 +32,7 @@ Our wall follower worked in three parts. First, we used the laserscan data to de
 Once we received the LaserScan data from the LIDAR, we filtered out points that were not relevant. In the wall-following situation, this meant that we only looked at points to the left and in front of the racecar if it was following the left wall, and only looked at points to the right and in front of the racecar if it was following the right wall. From here, we were able to use a simple linear regression to consider all the LaserScan points on the correct side of the robot, and create a linear model for the wall that represented its location relative to the robot.
 
 
-<img src="https://drive.google.com/uc?export=view&id=1JzJuRfkzzQDQmDS3wRuRt6FqI9PWZYxf" alt="marker" height="430" width="500">
+<img src="https://drive.google.com/uc?export=view&id=1JzJuRfkzzQDQmDS3wRuRt6FqI9PWZYxf" alt="marker" height="430" width="600">
 **Figure 2: Racecar's wall marker**
 Here the racecar has published a red line to mark the location of the wall based on a linear regression of the LIDAR points.
 
@@ -41,7 +41,7 @@ Here the racecar has published a red line to mark the location of the wall based
 After locating the wall, we needed to know two things: the distance the robot was positioned from the wall, and the angle it was rotated relative to the wall. We used trigonometry and algebra to find these values. From here we calculated the error values by subtracting the measured distances and angles from the desired distance and angle, in which the angle we want is parallel to the detected wall.
 
 
-<img src="https://drive.google.com/uc?export=view&id=1hiHxr4mU3RPxGgT7zNPla2e159NOhu2X" alt="error" height="430" width="500">
+<img src="https://drive.google.com/uc?export=view&id=1hiHxr4mU3RPxGgT7zNPla2e159NOhu2X" alt="error" height="430" width="600">
 **Figure 3: Calculating distance and angle error**
 Distance error was calculated by subtracting our measured distance, d, from our desired distance, shown here at the dotted line. Our angle error was calculated by finding theta, shown here as the angle between our car's forward facing direction and the wall.
 
