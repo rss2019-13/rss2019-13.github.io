@@ -85,13 +85,12 @@ A simulation of the robot navigating a corner, demonstrating how the robot detec
 Once we were satisfied with performance in the simulator we tested the wall follower at varying speeds and follow distances and found that the wall follower was robust until the racecar followed the wall into a corner that is smaller than the racecar's turning radius.
 
 
-<img src="https://drive.google.com/uc?export=view&id=1dGoW3Jy84AZovz1FIT_sr45QQewslqBN" alt="error" height="350" width="600">
+<img src="https://drive.google.com/uc?export=view&id=dGoW3Jy84AZovz1FIT_sr45QQewslqBN" alt="Unsafe Situation" height="350" width="600">
 **Figure 6A: Error in a 90 degree turn**
 This is the error between the detected wall and the robot as it navigates the turn above. There is a jump in both distance error and angle error while the robot is turning that gets resolved quickly once it completes the turn.
 
 
 <iframe src="https://drive.google.com/file/d/1uszK7IT50Ih12Re9hpIXc6Htdm4BAsaH/preview" width="640" height="480"></iframe>
-
 **Figure 6B: Wall following in the Stata basement**
 Here the robot navigates its way around a tricky section of the stata basement demonstrating its ability to follow turns in both directions with respect to the robot.
 
@@ -101,14 +100,12 @@ The safety controller was difficult to test because our wall follower is very go
 
 
 <iframe src="https://drive.google.com/file/d/1Tkm7g4VVzk5HKwvzR38WCib1oQ7BXAXg/preview" width="640" height="480"></iframe>
-
-**Figure 6A: Racecar Stopping for Feet (Small Obstacle)**
+**Figure 7A: Racecar Stopping for Feet (Small Obstacle)**
 Here the racecar stops for Nada’s feet, despite them being a small obstacle the racecar is still able to recognize the obstruction.
 
 
 <iframe src="https://drive.google.com/file/d/1IwhcK9tdZupGrTsqhb97D4yDe4mR9aGM/preview" width="640" height="480"></iframe>
-
-**Figure 6B: Racecar Stopping for Lid (Sudden Obstacle)**
+**Figure 7B: Racecar Stopping for Lid (Sudden Obstacle)**
 Here the racecar stops when a lid is placed in front of it. After the lid moves out of the way, the racecar continues.
 
 ## **Lessons Learned (Eric)**

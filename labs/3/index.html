@@ -47,7 +47,7 @@ We first evaluated the wall follower in a simulator to tune the control system. 
 <br/><strong>Figure 5: Racecar navigating 90 degree turn in simulation</strong>
 A simulation of the robot navigating a corner, demonstrating how the robot detects the wall.
 <br/><br/>Once we were satisfied with performance in the simulator we tested the wall follower at varying speeds and follow distances and found that the wall follower was robust until the racecar followed the wall into a corner that is smaller than the racecar's turning radius.
-<br/><br/><img src="https://drive.google.com/uc?export=view&id=1dGoW3Jy84AZovz1FIT_sr45QQewslqBN" alt="error" height="350" width="600">
+<br/><br/><img src="https://drive.google.com/uc?export=view&id=dGoW3Jy84AZovz1FIT_sr45QQewslqBN" alt="Unsafe Situation" height="350" width="600">
 <br/><strong>Figure 6A: Error in a 90 degree turn</strong>
 This is the error between the detected wall and the robot as it navigates the turn above. There is a jump in both distance error and angle error while the robot is turning that gets resolved quickly once it completes the turn.
 <br/><br/><iframe src="https://drive.google.com/file/d/1uszK7IT50Ih12Re9hpIXc6Htdm4BAsaH/preview" width="640" height="480"></iframe>
@@ -56,10 +56,10 @@ Here the robot navigates its way around a tricky section of the stata basement d
 <br/><br/><h3><em>Safety Controller</em></h3>
 The safety controller was difficult to test because our wall follower is very good at navigating the racecar around obstacles. However, the safety controller was still needed for smaller obstructions and obstacles suddenly getting in the way. Below are examples of the safety controller in action. As you can see in the second video, as soon as the obstacle leaves the lockout region, the racecar continues following the wall.
 <br/><br/><iframe src="https://drive.google.com/file/d/1Tkm7g4VVzk5HKwvzR38WCib1oQ7BXAXg/preview" width="640" height="480"></iframe>
-<br/><strong>Figure 6A: Racecar Stopping for Feet (Small Obstacle)</strong>
+<br/><strong>Figure 7A: Racecar Stopping for Feet (Small Obstacle)</strong>
 Here the racecar stops for Nada’s feet, despite them being a small obstacle the racecar is still able to recognize the obstruction.
 <br/><br/><iframe src="https://drive.google.com/file/d/1IwhcK9tdZupGrTsqhb97D4yDe4mR9aGM/preview" width="640" height="480"></iframe>
-<br/><strong>Figure 6B: Racecar Stopping for Lid (Sudden Obstacle)</strong>
+<br/><strong>Figure 7B: Racecar Stopping for Lid (Sudden Obstacle)</strong>
 Here the racecar stops when a lid is placed in front of it. After the lid moves out of the way, the racecar continues.
 <h2><strong>Lessons Learned (Eric)</strong></h2>
 To ensure more efficient group work, rigorous testing of edge cases and better delegation of tasks are needed. The initial approach we took to detecting obstacles in a collision zone was to detect LaserScan points in a triangular area in front of the racecar. However, we found that this method did not cover all cases of potential obstacles, since points directly in front of the left or right edges of the racecar would not be detected and the racecar would collide into those undetected obstacles. We then changed our approach to identifying obstacles in a rectangular area in front of the racecar, which works well.
