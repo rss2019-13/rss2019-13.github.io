@@ -21,9 +21,11 @@ SLAM?
 The motion model takes in an array of particles and updates them according to the odometry measurements from the robots internal sensors. The robot outputs an odometry message which gives an approximate position [x, y, ፀ]. The motion model takes the difference between the current position and the previous position to get [dx, dy, dፀ]. 
 
 ###*Sensor Model (Nada)*
-Once we had determined particle positions with the motion model, the sensor model used LIDAR data to filter particles based on probability. We calculated this probability based on four factors: the probability of detecting a known obstacle in the map, the probability of a short measurement, the probability of a very large/missed measurement, and the probability of a random measurement
+Once we had determined particle positions with the motion model, the sensor model used LIDAR data to filter particles based on probability. We calculated this probability based on four factors: the probability of detecting a known obstacle in the map, the probability of a short measurement, the probability of a very large/missed measurement, and the probability of a random measurement.
 
-These probabilities were defined as followed:
+These probabilities were defined as follows:
+
+
 <img src="https://drive.google.com/uc?export=view&id=1BbGoKBRhd75FGShA9HBLQFdDmKtOmln7" alt="phit" height="100" width="400">
 **Figure 3A: Calculating p_hit**
 The probability of detecting a known obstacle in the map was represented as a gaussian distribution centered around the ground truth distance between the hypothesis pose and the nearest map obstacle.
