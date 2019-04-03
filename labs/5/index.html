@@ -1,2 +1,46 @@
-<!DOCTYPE HTML><html><head><title>RSS Team 13</title><link rel="stylesheet" type="text/css" href="../../css/style.css"><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$']],displayMath: [['$$','$$']],skipTags: ["script","noscript","style","textarea","code"]},TeX: {equationNumbers: {autoNumber: "AMS"}}});</script><script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script></head><body><div id="main"><div id="logo"><div id="logo_text"><h1><a href="../.."><span class="logo_colour">RSS Team 13</span></a></h1><h2>MIT Spring 2019</h2></div></div><div id="header"><div id="menubar"><ul id="menu"><li class=""><a href="../..">Home</a></li><li class="selected"><a href="../../labs">Labs</a></li><li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Video</a></li><li><a href="https://github.mit.edu/rss2019-13">Github</a></li></ul></div></div><div id="site_content"><div id="content"><h1>Lab 5</h1>
-</div></div></div></body></html>
+<!DOCTYPE HTML><html><head><title>RSS Team 13</title><link rel="stylesheet" type="text/css" href="../../css/style.css"><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$']],displayMath: [['$$','$$']],skipTags: ["script","noscript","style","textarea","code"]},TeX: {equationNumbers: {autoNumber: "AMS"}}});</script><script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script></head><body><div id="main"><div id="logo"><div id="logo_text"><h1><a href="../.."><span class="logo_colour">RSS Team 13</span></a></h1><h2>MIT Spring 2019</h2></div></div><div id="header"><div id="menubar"><ul id="menu"><li class=""><a href="../..">Home</a></li><li class="selected"><a href="../../labs">Labs</a></li><li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Video</a></li><li><a href="https://github.mit.edu/rss2019-13">Github</a></li></ul></div></div><div id="site_content"><div id="content"><h1>Lab 5: Localization</h1>
+Our briefing slides can be found <a href="https://docs.google.com/presentation/d/e/2PACX-1vTX9UHYMN6F9P_uf9IQ6b1OAXbz3sXFKd_jL8gPUZn_0H1Jb4tpJtq0qgGNKi-lr2JAXZma9b8WczIM/embed?start=false&amp;loop=false&amp;delayms=3000">here</a>.
+<hr>
+<h2><strong>Overview and Motivations</strong></h2>
+For lab 5, our goal was to give the robot the ability to find its position in a known environment. This is useful for future projects as in order for the robot to plan a path it first needs to know where it is. In order to do localize the robot, we use both interoceptive sensors measuring the wheel actuation and the robot’s LIDAR, an exteroceptive sensor. We use both of these measurements together because motion data is quick to calculate and LIDAR data corrects the error of the motion model.
+<hr>
+<h2>Table of Contents</h2>
+Motion Model
+Sensor Model
+Particle Filter
+SLAM?
+<hr>
+<h2><strong>Proposed Approach</strong></h2>
+<h3><em>Motion Model</em></h3>
+The motion model takes in an array of particles and updates them according to the odometry measurements from the robots internal sensors.
+<h3><em>Sensor Model (Nada)</em></h3>
+Once we had determined particle positions with the motion model, the sensor model used LIDAR data to filter particles based on probability. We calculated this probability based on four factors:
+Probability of detecting a known obstacle in the map
+Probability of a short measurement
+Probability of a very large/missed measurement
+Probability of a random measurement
+These probabilities were defined as followed:
+<img src="https://drive.google.com/uc?export=view&id=1BbGoKBRhd75FGShA9HBLQFdDmKtOmln7" alt="phit" height="370" width="600">
+<br><strong>Figure 3A: Calculating p_hit</strong>
+The probability of detecting a known obstacle in the map was represented as a gaussian distribution centered around the ground truth distance between the hypothesis pose and the nearest map obstacle.
+<img src="https://drive.google.com/uc?export=view&id=1OcmCqA5pXyZKDzSe_bwgoy-HwejmLkWS" alt="pshort" height="370" width="600">
+<br><strong>Figure 3B: Calculating p_short</strong>
+The probability of a short measurement was represented as a downward sloping line as the ray gets further from the robot.
+<img src="https://drive.google.com/uc?export=view&id=1N1YYRUOQmxf5M7G9-SabJ45citCjG8av" alt="pshort" height="370" width="600">
+<br><strong>Figure 3C: Calculating p_max</strong>
+The probability of a very large measurement was represented as a large spike in probability at the maximal range value.
+<img src="https://drive.google.com/uc?export=view&id=10rHN6TO6L8_ED4lO6_n5HDSM0goDL5BL" alt="pshort" height="370" width="600">
+<br><strong>Figure 3D: Calculating p_rand</strong>
+The probability of a random measurement was represented by a small uniform value.
+<br/><br/>From here, we mixed these four distributions by a weighted average as follows:
+<img src="https://drive.google.com/uc?export=view&id=17wS-hThxEVmGtmoKbmubv5UmoW5vYJbA" alt="pshort" height="370" width="600">
+<br><strong>Figure 4: Calculating p_total</strong>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><h2><em>Precomputing the Sensor Model (Nada)</em></h2>
+In order to speed up computation, we precomputed a discretized sensor model array that we could use to simply look up any values for z_t and z_t<em>. To do this, we computed all p_total values for all combinations of z_t and z_t</em> star in the range of 0 to 10, where we incremented each value by 0.1 each time we computed the probability.
+<br/><br/><h2><em>Applying the Sensor Model (Nada)</em></h2>
+<br/><br/><h2><strong>Experimental Evaluation</strong></h2>
+<h3><em>In Simulation</em></h3>
+Sensor Model
+<br/><br/><h3><em>On the Racecar</em></h3>
+<h2><strong>Lessons Learned (Nada)</strong></h2>
+<br/><br/><br/><br/></div></div></div></body></html>
