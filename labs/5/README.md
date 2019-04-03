@@ -18,7 +18,7 @@ SLAM?
 
 ## **Proposed Approach**
 ### *Motion Model*
-The motion model takes in an array of particles and updates them according to the odometry measurements from the robots internal sensors. The robot outputs an odometry message which gives an approximate x, y and theta. 
+The motion model takes in an array of particles and updates them according to the odometry measurements from the robots internal sensors. The robot outputs an odometry message which gives an approximate position [x, y, ፀ].
 
 ###*Sensor Model (Nada)*
 Once we had determined particle positions with the motion model, the sensor model used LIDAR data to filter particles based on probability. We calculated this probability based on four factors:
@@ -29,26 +29,26 @@ Probability of a very large/missed measurement
 Probability of a random measurement
 
 These probabilities were defined as followed:
-<img src="https://drive.google.com/uc?export=view&id=1BbGoKBRhd75FGShA9HBLQFdDmKtOmln7" alt="phit" height="370" width="600">
+<img src="https://drive.google.com/uc?export=view&id=1BbGoKBRhd75FGShA9HBLQFdDmKtOmln7" alt="phit" height="100" width="400">
 **Figure 3A: Calculating p_hit**
 The probability of detecting a known obstacle in the map was represented as a gaussian distribution centered around the ground truth distance between the hypothesis pose and the nearest map obstacle.
 
-<img src="https://drive.google.com/uc?export=view&id=1OcmCqA5pXyZKDzSe_bwgoy-HwejmLkWS" alt="pshort" height="200" width="500">
+<img src="https://drive.google.com/uc?export=view&id=1OcmCqA5pXyZKDzSe_bwgoy-HwejmLkWS" alt="pshort" height="100" width="400">
 **Figure 3B: Calculating p_short**
 The probability of a short measurement was represented as a downward sloping line as the ray gets further from the robot.
 
-<img src="https://drive.google.com/uc?export=view&id=1N1YYRUOQmxf5M7G9-SabJ45citCjG8av" alt="pshort" height="200" width="500">
+<img src="https://drive.google.com/uc?export=view&id=1N1YYRUOQmxf5M7G9-SabJ45citCjG8av" alt="pshort" height="100" width="400">
 **Figure 3C: Calculating p_max**
 The probability of a very large measurement was represented as a large spike in probability at the maximal range value.
 
-<img src="https://drive.google.com/uc?export=view&id=10rHN6TO6L8_ED4lO6_n5HDSM0goDL5BL" alt="pshort" height="200" width="500">
+<img src="https://drive.google.com/uc?export=view&id=10rHN6TO6L8_ED4lO6_n5HDSM0goDL5BL" alt="pshort" height="100" width="400">
 **Figure 3D: Calculating p_rand**
 The probability of a random measurement was represented by a small uniform value.
 
 
 From here, we mixed these four distributions by a weighted average as follows:
 
-<img src="https://drive.google.com/uc?export=view&id=17wS-hThxEVmGtmoKbmubv5UmoW5vYJbA" alt="pshort" height="100" width="600">
+<img src="https://drive.google.com/uc?export=view&id=17wS-hThxEVmGtmoKbmubv5UmoW5vYJbA" alt="pshort" height="75" width="600">
 **Figure 4: Calculating p_total**
 
 
