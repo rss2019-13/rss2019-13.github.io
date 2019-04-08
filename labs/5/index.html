@@ -46,12 +46,12 @@ The probability of a random measurement was represented by a small uniform value
 To find the total probability of any given particle denoting the robot’s actual position, we simply added up all the individual probabilities, each multiplied by some factor such that the factors summed to one.
 <br/><br/><br/><br/><br/><br/><h2><em>Precomputing the Sensor Model (Nada)</em></h2>
 In order to speed up computation, we precomputed a discretized sensor model table that we could use to simply look up any values for z_t and z_t*. To do this, we computed all p_total values for all combinations of z_t and z_t* in the range of 0 to z_max, incrementing z_t and z_t* by 0.1 each time. In doing this, we were able to simply look up any probability given a z_t and z_t* value, which sped up our computation significantly.
-src="<a href="https://drive.google.com/uc?export=view&amp;id=15ePjn5CkA6SGagCsABDTC4qZRBxjKtNQ">https://drive.google.com/uc?export=view&amp;id=15ePjn5CkA6SGagCsABDTC4qZRBxjKtNQ</a>" alt="probgoal" height="100" width="400"&gt;
-<strong>Figure 5: Probability Distribution of Precomputed Model</strong>
+<img src="https://drive.google.com/uc?export=view&id=15ePjn5CkA6SGagCsABDTC4qZRBxjKtNQ" alt="probgoal" height="100" width="400">
+<br><strong>Figure 5: Probability Distribution of Precomputed Model</strong>
 For any given ground truth distance (shown at the green line), a cross section like this one showed us the probability distribution of reading some measured distance from the LIDAR scan.
 <br/><br/>Once we had these cross sections, we were able to create the entire lookup by creating the cross section for each given ground truth distance, and normalizing each distribution. Here you can see what this probability distribution looked like.
-<br/><br/>src="<a href="https://drive.google.com/uc?export=view&amp;id=14FQ-v9YAzApMxqbjjSzSEOzVOu5Ja4Kr">https://drive.google.com/uc?export=view&amp;id=14FQ-v9YAzApMxqbjjSzSEOzVOu5Ja4Kr</a>" alt="probdist" height="100" width="400"&gt;
-<strong>Figure 6: Probability Distribution</strong>
+<br/><br/><img src="https://drive.google.com/uc?export=view&id=14FQ-v9YAzApMxqbjjSzSEOzVOu5Ja4Kr" alt="probdist" height="100" width="400">
+<br><strong>Figure 6: Probability Distribution</strong>
 This probability distribution shows all combinations of z_t and z_t*.
 <br/><br/><br/><br/><h2><em>Applying the Sensor Model (Nada)</em></h2>
 Once we had a precomputed lookup table, we could take in some particles from the motion model as well as the LIDAR observations, and use this data to find the likelihood of each motion model particle accurately denoting the robot’s position on the map. From here, we were able to choose the higher likelihood particles and update our pose estimate based on those particles.
