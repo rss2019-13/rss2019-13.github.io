@@ -5,13 +5,13 @@ Our briefing slides can be found [here](https://docs.google.com/presentation/d/e
 ***
 
 ## **Overview and Motivations** (Mia)
-For lab 5, our goal was to give the robot the ability to find its position in a known environment. Localization is important for our future tasks in path planning and following. Without knowing where the racecar is, it is impossible to follow a path. We can do this by integrating the velocity of the robot as given by the interoceptive sensors measuring wheel motion. However as the car drives, error is builds up between this estimated position and the actual position, as a result of the surface it is driving on as well as wheel alignment and servo error. Therefore we must not solely rely on interoceptive sensors to localize. Instead we use a particle filter which takes input from both the interoceptive motion sensors, and LIDAR data. The particles in the particle each represent a guess for the robot’s position and heading. As the car drives, the motion model updates each particle based on the odometry. Then at a frequency of 8 Hz, the particle filter prunes the particles based on whether the LIDAR scan matches with the position, duplicating the points that were not pruned. After testing in both the simulator and on the actual robot, we tuned the motion and sensor models to get better results.
+For lab 5, our goal was to give the robot the ability to find its position in a known environment. Localization is important for our future tasks in path planning and following. Without being able to check the robots position as it is driving, the path follower would rely on the robot being able to precisely follow navigation commands. However as the car drives, error is builds up between this estimated position and the actual position, as a result of the surface it is driving on as well as wheel alignment and servo error. Therefore we must not solely rely on interoceptive sensors to localize. Instead we use a particle filter which takes input from both the interoceptive motion sensors and LIDAR data. The particles in the particle each represent a guess for the robot's position and heading. As the car drives, the motion model updates each particle based on the odometry. Then at a frequency of 8 Hz, the particle filter prunes the particles based on whether the LIDAR scan matches with the position, duplicating the points that were not pruned. After testing in both the simulator and on the actual robot, we tuned the motion and sensor models to get better results. We found that the robot is able to localize well in areas with lots of features, but struggles in long uniform hallways.
 
 ***
 
 ## **Proposed Approach**
 ### *Motion Model* (Mia)
-The motion model takes in an array of particles and updates them according to the odometry measurements from the robot's internal sensors. The robot outputs an odometry message which gives an approximate position [x, y, ፀ] in a global frame. The motion model takes the difference between the current position and the previous position to get [dx, dy, d\theta] in the odometry frame.
+The motion model takes in an array of particles and updates them according to the odometry measurements from the robots internal sensors. The robot outputs an odometry message which gives an approximate position [x, y, ፀ] in a global frame. The motion model takes the difference between the current position and the previous position to get [dx, dy, d\theta] in the odometry frame.
 
 <img src="https://drive.google.com/uc?export=view&id=14jsAD1c1eZi8pzeezz6YRyr2v_RCTtpp" alt="Odometry Frame" height="474" width="573">
 
@@ -26,7 +26,7 @@ Then noise is added to each particle randomly using a normal distribution. We wi
 
 <img src="https://drive.google.com/uc?export=view&id=1G2fua__Wffb1HbkPeoUB7yR7yNL0-iJK" alt="Adding Noise" height="79" width="464">
 
-Then the differences in position are rotated to map coordinates according to each particle’s angle.
+Then the differences in position are rotated to map coordinates according to each particle's angle.
 
 <img src="https://drive.google.com/uc?export=view&id=1YQ-_vXY8JTIcpgq0jOMs3MLTunQAqs5S" alt="Map Rotation" height="85" width="464">
 
@@ -38,7 +38,7 @@ Then each change in position is added to its particle.
 ###*Sensor Model (Nada)*
 Once we had determined particle positions with the motion model, the sensor model used LIDAR data to filter particles based on probability. In this way, we were able to use our LIDAR sensor data and the robot's current particle distribution, and compute the probability of receiving our LIDAR readings given the car location denoted by each particle in our motion model distribution. We then used these probabilities to update particle weights and determine the most likely car position.
 
-We calculated each particle’s likelihood based on four factors: the probability of detecting a known obstacle in the map, the probability of a short measurement, the probability of a very large/missed measurement, and the probability of a random measurement.
+We calculated each particle's likelihood based on four factors: the probability of detecting a known obstacle in the map, the probability of a short measurement, the probability of a very large/missed measurement, and the probability of a random measurement.
 
 These probabilities were defined as followed:
 
@@ -90,28 +90,38 @@ This probability distribution shows all combinations of z_t and z_t\*.
 
 
 ##*Applying the Sensor Model (Nada)*
-Once we had a precomputed lookup table, we could take in some particles from the motion model as well as the LIDAR observations, and use this data to find the likelihood of each motion model particle accurately denoting the robot’s position on the map. From here, we were able to choose the higher likelihood particles and update our pose estimate based on those particles. 
+Once we had a precomputed lookup table, we could take in some particles from the motion model as well as the LIDAR observations, and use this data to find the likelihood of each motion model particle accurately denoting the robot's position on the map. From here, we were able to choose the higher likelihood particles and update our pose estimate based on those particles. 
 
+##*Particle Filter*
+The particle filter combines these two models to produce accurate estimates of the car's position relative to the map. It does so by initializing an array of particles which are  randomly distributed around the car's initial position to account for uncertainty in this pose. It then applies to motion model to these particles for every odometry update it receives which moves each particle to the position it would be in after driving that distance. This causes the particles to spread out, simulating the increasing uncertainty in the car's position. This spread is narrowed by the sensor model, which is called every fifth LIDAR scan that arrives. The sensor model uses a ray tracing algorithm combined with the probability table discussed above to determine how likely each particle is given the measured positions of the walls. Each particle is assigned a probability based on this output, and a new set of particles is drawn from this distribution to reduce the number of particles that have diverged too far from the true position. The robot's position is assumed to be the mean of the positions of these particles, while its orientation is determined by taking the mean of circular quantities of the particles.
 
 
 ## **Experimental Evaluation**
 
 ### *In Simulation*
 
-We first tested the particle filter on the simulated car. We created a copy of the car’s odometry data with noise added and attempted to localize given this noise. The noise chosen included a random factor with mean 1 and SD 0.01 multiplied onto the odometry vector as well as additive noise with a mean of 0 and an SD of 0.01. This appeared to recreate the noise effects we saw on the real car at our chosen driving speed of 1 m/s. 
+We first tested the particle filter on the simulated car. We created a copy of the car's odometry data with noise added and attempted to localize given this noise. The noise chosen included a random factor with mean 1 and SD 0.01 multiplied onto the odometry vector as well as additive noise with a mean of 0 and an SD of 0.01. This appeared to recreate the noise effects we saw on the real car at our chosen driving speed of 1 m/s. 
 
-The filter is 
+We used the simulation to tune the robot's free parameters, such as motion model noise and sensor model evaluation frequency. The second parameter was of particular interest as we found that it had a significant effect on the performance of the filter. To find the best value, we recorded a driven route through the map and compared the position output by the filter to the real position for a variety of frequencies. These results are shown below. 
+
+<img src="https://drive.google.com/uc?export=view&id=14FQ-v9YAzApMxqbjjSzSEOzVOu5Ja4Kr" alt="probdist" height="250" width="400">
+**Figure 7: Simulated Localization**
+i=1\*.
+
+As shown by these graphs, as the time between successive updates from the sensor model increases the maximum error increases and the minimum error decreases. The happens because the racecar is relying on the motion model for a longer period of time and the predicted location tends to drift away from the actual location. When the sensor model is used to then resample the particles, it has a wider range of options to choose from allowing it to make a better prediction of where the car actually is.
+
+While this change found that this only slightly improves the results in the simulation, it does a fantastic job on the actual robot. The reason for this is that the racecar does not have gaussian noise like we added to the simulation. The racecar's tends to drif
 
 
 ### *On the Racecar*
 
-Though not as reliable as in simulation, the particle filter performs well on the car and is able to reliably update the car’s pose. It is much more difficult to measure error on the physical car than it is in the simulation, so the results in this section will largely be observations about the strengths and weaknesses of the algorithm when it is run on the car. 
+Though not as reliable as in simulation, the particle filter performs well on the car and is able to reliably update the car's pose. It is much more difficult to measure error on the physical car than it is in the simulation, so the results in this section will largely be observations about the strengths and weaknesses of the algorithm when it is run on the car. 
 
-We did all of our testing in the basement of the Stata center and found that in hallway close to 32-044 produced very good results. The hallway has enough complicated features that there are rarely ambiguous positions, so the sensor model is able to update the car’s position accurately even as the motion model drifts away from the real result slightly. We found that it was important to tune the relative frequency of motion model and sensor model updates. The motion model is updated every odometry message, while the sensor model is only evaluated every five scans. If this ratio is too large the sensor model is not run frequently enough and the pose is allowed to drift with odometry error, but if it is run too frequently the car’s motion is typically ignored as the results are effectively overridden by the sensor model.
+We did all of our testing in the basement of the Stata center and found that in hallway close to 32-044 produced very good results. The hallway has enough complicated features that there are rarely ambiguous positions, so the sensor model is able to update the car's position accurately even as the motion model drifts away from the real result slightly. We found that it was important to tune the relative frequency of motion model and sensor model updates. The motion model is updated every odometry message, while the sensor model is only evaluated every five scans. If this ratio is too large the sensor model is not run frequently enough and the pose is allowed to drift with odometry error, but if it is run too frequently the car's motion is typically ignored as the results are effectively overridden by the sensor model.
 
 On hallways such as the wider rectangular spaces further from the classroom, the car can sometimes struggle as the sensor model can not uniquely identify its position along the hall. Movement along the minor axis of the hallway is tracked well, but the sensor model is not able to fix odometry errors in movement along the major axis of the hallway because the scan data is approximately constant along this axis.
 
-The filter functions very well at speeds up to 1.5 m/s. If acceleration is kept reasonable the car can still localize at higher speeds in the proper environment, but errors seem to accumulate faster and the chances of divergence increase. With further tuning the filter’s performance at higher speeds could be improved.
+The filter functions very well at speeds up to 1.5 m/s. If acceleration is kept reasonable the car can still localize at higher speeds in the proper environment, but errors seem to accumulate faster and the chances of divergence increase. With further tuning the filter's performance at higher speeds could be improved.
 
 ## **Lessons Learned (Nada)**
 
