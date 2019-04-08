@@ -79,7 +79,7 @@ To find the total probability of any given particle denoting the robot’s actua
 
 
 ##*Precomputing the Sensor Model (Nada)*
-In order to speed up computation, we precomputed a discretized sensor model table that we could use to simply look up any values for z_t and z_t*. To do this, we computed all p_total values for all combinations of z_t and z_t* in the range of 0 to z_max, incrementing z_t and z_t* by 0.1 each time. In doing this, we were able to simply look up any probability given a z_t and z_t* value, which sped up our computation significantly. 
+In order to speed up computation, we precomputed a discretized sensor model table that we could use to simply look up any values for z_t and z_t\*. To do this, we computed all p_total values for all combinations of z_t and z_t\* in the range of 0 to z_max, incrementing z_t and z_t\* by 0.1 each time. In doing this, we were able to simply look up any probability given a z_t and z_t\* value, which sped up our computation significantly. 
 
 src="https://drive.google.com/uc?export=view&id=15ePjn5CkA6SGagCsABDTC4qZRBxjKtNQ" alt="probgoal" height="100" width="400">
 **Figure 5: Probability Distribution of Precomputed Model**
@@ -91,7 +91,7 @@ Once we had these cross sections, we were able to create the entire lookup by cr
 
 src="https://drive.google.com/uc?export=view&id=14FQ-v9YAzApMxqbjjSzSEOzVOu5Ja4Kr" alt="probdist" height="100" width="400">
 **Figure 6: Probability Distribution**
-This probability distribution shows all combinations of z_t and z_t*. 
+This probability distribution shows all combinations of z_t and z_t\*. 
 
 
 
