@@ -11,26 +11,42 @@ For lab 5, our goal was to give the robot the ability to find its position in a 
 
 ## **Proposed Approach**
 ### *Motion Model* (Mia)
-The motion model takes in an array of particles and updates them according to the odometry measurements from the robots internal sensors. The robot outputs an odometry message which gives an approximate position [x, y, ፀ] in a global frame. The motion model takes the difference between the current position and the previous position to get [dx, dy, d\theta] in the odometry frame.
+The motion model takes in an array of particles and updates them according to the odometry measurements from the robots internal sensors. The robot outputs an odometry message which gives an approximate position [x, y, &theta;] in a global frame. The motion model takes the difference between the current position and the previous position to get [dx, dy, &theta;] in the odometry frame.
+
 
 <img src="https://drive.google.com/uc?export=view&id=14jsAD1c1eZi8pzeezz6YRyr2v_RCTtpp" alt="Odometry Frame" height="474" width="573">
+
+
+**Figure 1A: Odometry Frame**
 
 Then the differences in position are rotated by the negative of its angle in odometry coordinates.
 
 <img src="https://drive.google.com/uc?export=view&id=1t7Kh0-cNQcf1TxZq201GpsRCQtQeNdw1" alt="Car Frame Rotation" height="100" width="496">
+**Figure 1B: Rotation Between Odometry and Car Frames**
+
+
 <img src="https://drive.google.com/uc?export=view&id=1uKtovqCwPBCsbLXBirO6edtgLkD7kRoS" alt="Car Frame" height="462" width="583">
+**Figure 1C: Change in Position in the Car Frame**
 
 
 
 Then noise is added to each particle randomly using a normal distribution. We will tune the noise values later.
 
+
 <img src="https://drive.google.com/uc?export=view&id=1G2fua__Wffb1HbkPeoUB7yR7yNL0-iJK" alt="Adding Noise" height="79" width="464">
+**Figure 1D: Noise Calculation**
+
 
 Then the differences in position are rotated to map coordinates according to each particle's angle.
 
+
 <img src="https://drive.google.com/uc?export=view&id=1YQ-_vXY8JTIcpgq0jOMs3MLTunQAqs5S" alt="Map Rotation" height="85" width="464">
+**Figure 2A: Rotation Between Car and Map Frames**
+
 
 <img src="https://drive.google.com/uc?export=view&id=10MG8khs0M42zed0mdMHaLdvmIYQTIwO0" alt="Map Frame" height="587" width="705">
+**Figure 2B: Change in Position in the Map Frame**
+
 
 Then each change in position is added to its particle.
 
@@ -92,11 +108,11 @@ This probability distribution shows all combinations of z_t and z_t\*.
 ##*Applying the Sensor Model (Nada)*
 Once we had a precomputed lookup table, we could take in some particles from the motion model as well as the LIDAR observations, and use this data to find the likelihood of each motion model particle accurately denoting the robot's position on the map. From here, we were able to choose the higher likelihood particles and update our pose estimate based on those particles. 
 
-##*Particle Filter*
+###*Particle Filter (Andrew)*
 The particle filter combines these two models to produce accurate estimates of the car's position relative to the map. It does so by initializing an array of particles which are  randomly distributed around the car's initial position to account for uncertainty in this pose. It then applies to motion model to these particles for every odometry update it receives which moves each particle to the position it would be in after driving that distance. This causes the particles to spread out, simulating the increasing uncertainty in the car's position. This spread is narrowed by the sensor model, which is called every fifth LIDAR scan that arrives. The sensor model uses a ray tracing algorithm combined with the probability table discussed above to determine how likely each particle is given the measured positions of the walls. Each particle is assigned a probability based on this output, and a new set of particles is drawn from this distribution to reduce the number of particles that have diverged too far from the true position. The robot's position is assumed to be the mean of the positions of these particles, while its orientation is determined by taking the mean of circular quantities of the particles.
 
 
-## **Experimental Evaluation**
+## **Experimental Evaluation (Andrew & Eric)**
 
 ### *In Simulation*
 
@@ -104,13 +120,27 @@ We first tested the particle filter on the simulated car. We created a copy of t
 
 We used the simulation to tune the robot's free parameters, such as motion model noise and sensor model evaluation frequency. The second parameter was of particular interest as we found that it had a significant effect on the performance of the filter. To find the best value, we recorded a driven route through the map and compared the position output by the filter to the real position for a variety of frequencies. These results are shown below. 
 
-<img src="https://drive.google.com/uc?export=view&id=14FQ-v9YAzApMxqbjjSzSEOzVOu5Ja4Kr" alt="probdist" height="250" width="400">
-**Figure 7: Simulated Localization**
-i=1\*.
+
+<img src="https://drive.google.com/uc?export=view&id=1CkBjY6sVoTXXHsmXyAQZDp5kcXSaB3Ow" alt="probdist" height="250" width="400">
+**Figure 7: Simulated Localization with i = 1**
+
+
+
+<img src="https://drive.google.com/uc?export=view&id=1w90dukHRM9WNoNB-1bKfkrSooRzvHoYb" alt="probdist" height="250" width="400">
+**Figure 8: Simulated Localization with i = 2**
+
+
+<img src="https://drive.google.com/uc?export=view&id=1jFGs2SxX_7Gjrbh2lVcR9iFmD7NsIjb9" alt="probdist" height="250" width="400">
+**Figure 9: Simulated Localization with i = 5**
+
+
+<img src="https://drive.google.com/uc?export=view&id=16GCxf7LhNSVwVX-RGcGKzz7_zda_jAPM" alt="probdist" height="250" width="400">
+**Figure 10: Simulated Localization with i = 100**
+
 
 As shown by these graphs, as the time between successive updates from the sensor model increases the maximum error increases and the minimum error decreases. The happens because the racecar is relying on the motion model for a longer period of time and the predicted location tends to drift away from the actual location. When the sensor model is used to then resample the particles, it has a wider range of options to choose from allowing it to make a better prediction of where the car actually is.
 
-While this change found that this only slightly improves the results in the simulation, it does a fantastic job on the actual robot. The reason for this is that the racecar does not have gaussian noise like we added to the simulation. The racecar's tends to drif
+While this change found that this only slightly improves the results in the simulation, it does a fantastic job on the actual robot. The reason for this is that the racecar does not have gaussian noise like we added to the simulation. The racecar tends to drift to the left in real life and running the motion model for longer allows the particles to spread out a bit more before they are collapsed by the sensor model resampling.
 
 
 ### *On the Racecar*
