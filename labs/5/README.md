@@ -21,23 +21,23 @@ SLAM?
 ### *Motion Model* (Mia)
 The motion model takes in an array of particles and updates them according to the odometry measurements from the robots internal sensors. The robot outputs an odometry message which gives an approximate position [x, y, ፀ] in a global frame. The motion model takes the difference between the current position and the previous position to get [dx, dy, dፀ] in the odometry frame.
 
-<img src=“https://drive.google.com/open?id=14jsAD1c1eZi8pzeezz6YRyr2v_RCTtpp” alt=”Odometry Frame” height=”474” width=”573”>
+<img src="https://drive.google.com/open?id=14jsAD1c1eZi8pzeezz6YRyr2v_RCTtpp" alt="Odometry Frame" height="474" width="573">
 
 Then the differences in position are rotated by the negative of its angle in odometry coordinates.
 
-<img src=“https://drive.google.com/open?id=1uKtovqCwPBCsbLXBirO6edtgLkD7kRoS” alt=”Car Frame” height=”462” width=”583”>
+<img src="https://drive.google.com/open?id=1uKtovqCwPBCsbLXBirO6edtgLkD7kRoS" alt="Car Frame" height="462" width="583">
 
-<img src=”https://drive.google.com/open?id=1t7Kh0-cNQcf1TxZq201GpsRCQtQeNdw1” alt=”Car Frame Rotation” height=”100” width=”496”>
+<img src="https://drive.google.com/open?id=1t7Kh0-cNQcf1TxZq201GpsRCQtQeNdw1" alt="Car Frame Rotation" height="100" width="496">
 
 Then noise is added to each particle randomly using a normal distribution.
 
-<img src=”https://drive.google.com/open?id=1G2fua__Wffb1HbkPeoUB7yR7yNL0-iJK” alt=”Adding Noise” height=”158” width=”927”>
+<img src="https://drive.google.com/open?id=1G2fua__Wffb1HbkPeoUB7yR7yNL0-iJK" alt="Adding Noise" height="158" width="927">
 
 Then the differences in position are rotated to map coordinates according to each particle’s angle.
 
-<img src=”https://drive.google.com/open?id=10MG8khs0M42zed0mdMHaLdvmIYQTIwO0” alt=”Map Frame” height=”587” width=”705”>
+<img src="https://drive.google.com/open?id=10MG8khs0M42zed0mdMHaLdvmIYQTIwO0" alt="Map Frame" height="587" width="705">
 
-<img src=”https://drive.google.com/open?id=1YQ-_vXY8JTIcpgq0jOMs3MLTunQAqs5S” alt=”Map Rotation” hieght=”85” width=”464”>
+<img src="https://drive.google.com/open?id=1YQ-_vXY8JTIcpgq0jOMs3MLTunQAqs5S" alt="Map Rotation" height="85" width="464">
 
 Then each change in position is added to its particle.
 
