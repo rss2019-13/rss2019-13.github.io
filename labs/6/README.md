@@ -20,33 +20,27 @@ In order to implement a search-based path-planning algorithm, we decided to use 
 
 Before we could do this, we needed to account for the robot’s dimensions such that it would not clip any obstacles on its edges. To do this, we dilated all obstacles on the map, such that the point representation of the robot avoiding the dilated obstacles meant that the full body of the robot would avoid the real-world obstacles successfully.
 
-
 <img src="https://drive.google.com/uc?export=view&id=1_FznJNFJbGu9pMNg4KvTh-57gCy-Lcs4" alt="Path" height="462" width="583">
 **Figure 1: Dilated Map**
 Here, the map has been dilated such that all obstacles have a bumper added to them to ensure the sides of the car do not collide with anything.
 
-
 Once we had a dilated map, we were able to implement a search algorithm. Once the robot receives clicked points in Rviz, it sets these points as its start and end points. From here, we set up a queue of neighbors to explore. This queue was ordered such that the closest neighbor to the current point was always listed first. 
 
-At any given iteration of A Star, we looked at the closest neighbor currently in the queue. We then checked if this neighbor was within a reasonable margin of the end point. If it was, we had successfully solved the problem, and could then return the trajectory, which was then published in Rviz. 
+At any given iteration of A*, we looked at the closest neighbor currently in the queue. We then checked if this neighbor was within a reasonable margin of the end point. If it was, we had successfully solved the problem, and could then return the trajectory, which was then published in Rviz. 
 
 If the closest neighbor, or our current node, was still too far from the goal, we expanded our search by finding all neighbors to the current node that did not interfere with an obstacle. The process for this is shown in the image below.
-
 
 <img src="https://drive.google.com/uc?export=view&id=1m7anzZFBixMRwIC5-cpLYWW0RIgwRMJJ" alt="Path" height="462" width="583">
 **Figure 2: Process of Finding Neighbor Nodes**
 To find the neighbors of a node, our implementation had a set distance away from the current node that it looked for new nodes. The program then swept the car’s feasible turning angles, and stepped through this angle sweep at the given radius, and set those points as the new neighbor nodes to explore.
 
-
  We then made sure these neighbors were not interfering with the locations of the obstacles, and once they had been determined to be safe, added the neighbors to the queue to be explored on a later iteration of A*. 
 
 During each round, we also updated the cost of each node. This cost was how much distance the path had taken to get to some node in the trajectory. This cost was updated any time a node was reached in a shorter distance than we had initially set its cost to be. In this way, we were able to ensure a shortest path would be found by this algorithm. 
 
-
 <img src="https://drive.google.com/uc?export=view&id=1CecYPDg6d_jOoD1XM-EUUR1p70w17WnQ" alt="Path" height="462" width="583">
 **Figure 3: Path Found Using A***
 Here, the trajectory that the algorithm found is seen as a blue line on the map, and the nodes that were explored to reach this trajectory are marked as green points along the way. 
-
 
 
 ## *Sample Planning*
@@ -65,9 +59,24 @@ Now that we have a path from where the robot is to where we want it to be, we ne
 
 ### *Search Planning* (Nada)
 
-Our search-planning approach was very good at finding shortest paths. Because our implementation explored the nodes closest to the goal first, we guaranteed that we would find the optimal path. However, it took a lot of time to come up with the path using this method. This implementation took about a minute of set up time in order to find all the obstacles in the map, and even then could sometimes take up to a minute to find a path. 
+Our search-planning approach was very good at finding shortest paths. Because our implementation explored the nodes closest to the goal first, we guaranteed that we would find the optimal path. Below, a video can be seen of our algorithm finding a path between two points. 
 
-[insert video of path planning]
+
+<iframe src="https://drive.google.com/file/d/1S1-PouxVh_N0jOcvYu8IyABRH-mHtJGJ/preview" width="640" height="480"></iframe>
+**Figure 5: Search Planning in Simulation**
+Here, the algorithm successfully finds an optimal path between two clicked points in Rviz. 
+
+
+However, it took a lot of time to come up with the path using this method. This implementation took about a minute of set up time in order to find all the obstacles in the map. Afterwards, it could find some paths within a few seconds, and others could take up to two minutes to compute. 
+
+<img src="https://drive.google.com/uc?export=view&id=1ivyzZRbTb2qM3w_XTYBvHqG1g7Egi7p0" alt="Path" height="462" width="583">
+**Figure 5: Fast Path**
+Sometimes the path was found very quickly. This path was found in 10.2 seconds. 
+
+
+<img src="https://drive.google.com/uc?export=view&id=1p6uq9Lv0PSXrp2kyNfwtxET5ZNvNDF0D" alt="Path" height="462" width="583">
+**Figure 5: Slow Path**
+Other paths took a very long time to compute, such as this one. This path took 200 seconds to compute, and had to search through many nodes before it found it. This is seen in how much more dense the explored nodes marker (shown in green) appears, compared to the previous path.  
 
 
 ### *Sample Planning* 
