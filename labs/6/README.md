@@ -20,7 +20,7 @@ In order to implement a search-based path-planning algorithm, we decided to use 
 
 Before we could do this, we needed to account for the robot’s dimensions such that it would not clip any obstacles on its edges. To do this, we dilated all obstacles on the map, such that the point representation of the robot avoiding the dilated obstacles meant that the full body of the robot would avoid the real-world obstacles successfully.
 
-<img src="https://drive.google.com/uc?export=view&id=1_FznJNFJbGu9pMNg4KvTh-57gCy-Lcs4” alt=”Dilated Map” height=”462” width="583">
+<img src="https://drive.google.com/uc?export=view&id=1_FznJNFJbGu9pMNg4KvTh-57gCy-Lcs4" alt="Dilated Map" height="462" width="583">
 **Figure 1: Dilated Map**
 Here, the map has been dilated such that all obstacles have a bumper added to them to ensure the sides of the car do not collide with anything.
 
@@ -30,7 +30,7 @@ At any given iteration of A Star, we looked at the closest neighbor currently in
 
 If the closest neighbor, or our current node, was still too far from the goal, we expanded our search by finding all neighbors to the current node that did not interfere with an obstacle. The process for this is shown in the image below.
 
-<img src="https://drive.google.com/uc?export=view&id=1m7anzZFBixMRwIC5-cpLYWW0RIgwRMJJ” alt=”Finding Neighbors” height=”462” width="583">
+<img src="https://drive.google.com/uc?export=view&id=1m7anzZFBixMRwIC5-cpLYWW0RIgwRMJJ" alt="Finding Neighbors" height="462"width="583">
 **Figure 2: Process of Finding Neighbor Nodes**
 To find the neighbors of a node, our implementation had a set distance away from the current node that it looked for new nodes. The program then swept the car’s feasible turning angles, and stepped through this angle sweep at the given radius, and set those points as the new neighbor nodes to explore.
 
@@ -38,7 +38,7 @@ To find the neighbors of a node, our implementation had a set distance away from
 
 During each round, we also updated the cost of each node. This cost was how much distance the path had taken to get to some node in the trajectory. This cost was updated any time a node was reached in a shorter distance than we had initially set its cost to be. In this way, we were able to ensure a shortest path would be found by this algorithm. 
 
-<img src="https://drive.google.com/uc?export=view&id=1CecYPDg6d_jOoD1XM-EUUR1p70w17WnQ” alt=”Path” height=”462” width="583">
+<img src="https://drive.google.com/uc?export=view&id=1CecYPDg6d_jOoD1XM-EUUR1p70w17WnQ" alt="Path" height="462" width="583">
 **Figure 3: Path Found Using A***
 Here, the trajectory that the algorithm found is seen as a blue line on the map, and the nodes that were explored to reach this trajectory are marked as green points along the way. 
 
