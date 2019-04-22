@@ -59,12 +59,12 @@ Now that we have a path from where the robot is to where we want it to be, we ne
 
 ### *Search Planning* (Nada)
 
-Our search-planning approach was very good at finding shortest paths. Because our implementation explored the nodes closest to the goal first, we guaranteed that we would find the optimal path. Below, a video can be seen of our algorithm finding a path between two points. 
+Our search-planning approach was very good at finding shortest paths. Because our implementation explored the nodes closest to the goal first, we guaranteed that we would find the optimal path. Below, a video can be seen of our algorithm finding a path around Stata basement.  
 
 
-<iframe src="https://drive.google.com/file/d/1S1-PouxVh_N0jOcvYu8IyABRH-mHtJGJ/preview" width="640" height="480"></iframe>
+<iframe src="https://drive.google.com/file/d/1DpyEFvg_WxxT6DW-Y7o9u-CT0ecpsScn/preview" width="640" height="480"></iframe>
 **Figure 5: Search Planning in Simulation**
-Here, the algorithm successfully finds an optimal path between two clicked points in Rviz. 
+Here, the algorithm successfully finds an optimal path to drive around a loop in Stata basement. This was enabled using waypoints, such that the racecar would drive all the way around rather than return the shorter path that simply closed the gap between the initial and final point. This video is sped up to 2.5x -- this path took 202.8 seconds to find in real time.
 
 
 However, it took a lot of time to come up with the path using this method. This implementation took about a minute of set up time in order to find all the obstacles in the map. Afterwards, it could find some paths within a few seconds, and others could take up to two minutes to compute. 
