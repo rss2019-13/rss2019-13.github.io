@@ -70,7 +70,7 @@ After a specified number of iterations, RRT will sample in the goal region. This
 
 <img src="https://drive.google.com/uc?export=view&id=1GkPBMY7bqKgEeRegpm6J5uJ4dpk67OkF" alt="find path" height="302" width="535">
 
-**Figure 2.4: Path Found by RRT\**
+**Figure 2.4: Path Found by RRT\***
 
 
 
@@ -177,7 +177,7 @@ To understand how different values of neighbor radius impact the computation tim
 These results show that computation time and path length are strongly related through the neighbor radius. Path length quickly approaches a minimum, pseudo-optimal value while computation time increases quickly with neighbor radius. Based on these results, we picked a neighbor radius of three because it produces close to the optimal path while saving significant time when compared to higher radii. 
 
 
-<img src="https://drive.google.com/uc?export=view&id=1mRNa2m4dR9J7Qdn5heqygL--PmLGwxfb" alt="RRT vs RRT\*" height="540" width="960">
+<img src="https://drive.google.com/uc?export=view&id=1mRNa2m4dR9J7Qdn5heqygL--PmLGwxfb" alt="RRT vs RRT\*" height="270" width="480">
 
 **Figure 4.3: Comparison of calculation times and paths between RRT\* parameter settings**
 
