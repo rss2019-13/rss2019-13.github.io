@@ -56,7 +56,7 @@ We chose to implement Rapidly-exploring Random Tree (RRT) for our sample based p
 Then RRT uses a steering function to find the point the car would reach if it drove toward the sampled point from its closest graph neighbor for a specified distance.
 
 
-<img src="https://drive.google.com/uc?export=view&id=1qbbPZrQpXJbRDb6iJGPIgWwh2r3pCBAf” alt="steering function" height="301" width="541">
+<img src="https://drive.google.com/uc?export=view&id=1qbbPZrQpXJbRDb6iJGPIgWwh2r3pCBAf" alt="steering function" height="301" width="541">
 
 **Figure 2.2: Steering Function Finds New Node Location**
 
@@ -64,7 +64,7 @@ Then RRT uses a steering function to find the point the car would reach if it dr
 Then if there are no obstacles from the neighbor to the new node, RRT will add the node to the graph with the neighbor as its parent.
 
 
-<img src="https://drive.google.com/uc?export=view&id=1ly1Is-I8DhnAVUDqg0_4-prILTy4HOmK” alt="steering function" height="298" width="534">
+<img src="https://drive.google.com/uc?export=view&id=1ly1Is-I8DhnAVUDqg0_4-prILTy4HOmK" alt="steering function" height="298" width="534">
 
 **Figure 2.3: Connecting the New Node to the Graph**
 
@@ -78,17 +78,19 @@ After a specified number of iterations, RRT will sample in the goal region. This
 
 
 
-###*RRT\**
+### *RRT\* *
 Because RRT does not produce optimal paths, we used the RRT\* modification, which checks for the most optimal way to connect the tree after each point is added.
 
 RRT\* follows the same steps to find new endpoints.
 
-<img src="https://drive.google.com/uc?export=view&id=12xej78auriIDwV_VBAyI8nGbMYSiWyOI" alt="New Node RRT\*" height="268" width="435">
+
+<img src="https://drive.google.com/uc?export=view&id=12xej78auriIDwV_VBAyI8nGbMYSiWyOI" alt="New Node RRT*" height="268" width="435">
 
 **Figure 2.5: New RRT\* Node**
 
 
 RRT\* then looks within a search radius for the node to connect the new endpoint to such that the cost to the endpoint is minimized, checking that there are no obstacles in the way. 
+
 
 <img src="https://drive.google.com/uc?export=view&id=12xej78auriIDwV_VBAyI8nGbMYSiWyOI" alt="Best neighbor RRT\*" height="281" width="432">
 
@@ -96,6 +98,7 @@ RRT\* then looks within a search radius for the node to connect the new endpoint
 
 
 RRT\* then checks if there are any nodes within the radius that could be reached at lower cost through the new node than through its previous parent node without any obstacles in the way.
+
 
 <img src="https://drive.google.com/open?id=1d9XNlanDUGKS4Edmz7OvkJHU61jcjLtR" alt="Rewiring the Tree" height="301" width="459">
 
@@ -126,6 +129,7 @@ The convergence time was much smaller on the trial with 0.5 meters of lookahead,
 **Figure 2.10: Sharp Turn Error**
 
 Both the 0.5 meter and 2 meter lookahead trials had large errors compared to the 1 meter trial. The large lookahead tries to smooth the curve out approximating it as a gradual curve leading to a large, long lasting error. The short lookahead reacts to the curve too late and the car cannot physically turn sharp enough to follow the desired trajectory. 1 meter of look ahead balances these two effects well. 
+
 
 <img src="https://drive.google.com/uc?export=view&id=1q9vrZ4bjNagLhG_Y5gyaBsXjeFqZZPfA" alt="Path" height="300">
 **Figure 2.11: Zig-Zag Error**
