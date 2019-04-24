@@ -24,6 +24,7 @@ Before we could do this, we needed to account for the robot's dimensions such th
 **Figure 1.1: Dilated Map**
 Here, the map has been dilated such that all obstacles have a buffer added to them to ensure the sides of the car do not collide with or drive too close to anything.
 
+
 Once we had a dilated map, we were able to implement a search algorithm. Once the robot receives clicked points in Rviz, it sets these points as its start and end points. From here, we set up a queue of neighbors to explore. This queue was ordered such that the closest neighbor to the current point was always listed first. 
 
 At any given iteration of A\*, we looked at the node currently in the queue that had the lowest projected distance to reach the goal. We then checked if this neighbor was within a reasonable margin of the end point. If it was, we had successfully solved the problem, and could then return the trajectory, which was then published in Rviz. 
@@ -33,6 +34,7 @@ If the current node, was still too far from the goal, we expanded our search by 
 <img src="https://drive.google.com/uc?export=view&id=1m7anzZFBixMRwIC5-cpLYWW0RIgwRMJJ" alt="Path" height="462" width="583">
 **Figure 1.2: Process of Finding Neighbor Nodes**
 To find the neighbors of a node, our implementation had a set distance away from the current node that it looked for new nodes. The program then swept the car's feasible turning angles, and stepped through this angle sweep at the given radius, and set those points as the new neighbor nodes to explore.
+
 
  We then made sure these neighbors were not interfering with the locations of the obstacles, and once they had been determined to be safe, we calculated the projected distance from each of these neighbors to the goal. We then added the neighbors to the queue to be explored on a later iteration of A\*. 
 
@@ -49,25 +51,19 @@ Here, the trajectory that the algorithm found is seen as a blue line on the map,
 We chose to implement Rapidly-exploring Random Tree (RRT) for our sample based planner. RRT works by building a tree of viable paths through the state space. RRT begins each iteration by sampling a random point within the state space. To ensure that this point is a position the car could be in, it is drawn from the occupiable points on a dilated version of the map.
 
 <img src="https://drive.google.com/uc?export=view&id=150NqzO_jKj6QjyNkfUj-I25zsY1MpCYP" alt="sample point" height="301" width="535">
-
 **Figure 2.1: RRT Samples the State Space**
-
 
 Then RRT uses a steering function to find the point the car would reach if it drove toward the sampled point from its closest graph neighbor for a specified distance.
 
 
 <img src="https://drive.google.com/uc?export=view&id=1qbbPZrQpXJbRDb6iJGPIgWwh2r3pCBAf" alt="steering function" height="301" width="541">
-
 **Figure 2.2: Steering Function Finds New Node Location**
-
 
 Then if there are no obstacles from the neighbor to the new node, RRT will add the node to the graph with the neighbor as its parent.
 
 
 <img src="https://drive.google.com/uc?export=view&id=1ly1Is-I8DhnAVUDqg0_4-prILTy4HOmK" alt="steering function" height="298" width="534">
-
 **Figure 2.3: Connecting the New Node to the Graph**
-
 
 After a specified number of iterations, RRT will sample in the goal region. This will make the tree reach the goal faster. Once the tree has reached the goal, the path is extracted by tracing back from the node in the goal.
 
@@ -85,23 +81,20 @@ RRT\* follows the same steps to find new endpoints.
 
 
 <img src="https://drive.google.com/uc?export=view&id=12xej78auriIDwV_VBAyI8nGbMYSiWyOI" alt="New Node RRT*" height="268" width="435">
-
 **Figure 2.5: New RRT\* Node**
 
 
 RRT\* then looks within a search radius for the node to connect the new endpoint to such that the cost to the endpoint is minimized, checking that there are no obstacles in the way. 
 
 
-<img src="https://drive.google.com/uc?export=view&id=12xej78auriIDwV_VBAyI8nGbMYSiWyOI" alt="Best neighbor RRT\*" height="281" width="432">
-
+<img src="https://drive.google.com/uc?export=view&id=12xej78auriIDwV_VBAyI8nGbMYSiWyOI" alt="Best neighbor RRT*" height="281" width="432">
 **Figure 2.6: Connecting the New Node**
 
 
 RRT\* then checks if there are any nodes within the radius that could be reached at lower cost through the new node than through its previous parent node without any obstacles in the way.
 
 
-<img src="https://drive.google.com/open?id=1d9XNlanDUGKS4Edmz7OvkJHU61jcjLtR" alt="Rewiring the Tree" height="301" width="459">
-
+<img src="https://drive.google.com/uc?export=view&id=1d9XNlanDUGKS4Edmz7OvkJHU61jcjLtR" alt="Rewiring the Tree" height="301" width="459">
 **Figure 2.7: Rewiring the Tree**
 
 
@@ -115,18 +108,22 @@ Once the drive point is found the car's steering angle is adjusted so that it wi
 
 To find this optimal look-ahead value we set the car's speed to 1.5 meters per second. We found this to work well with localization. Then we made a test trajectory with a sharp corner and a zig-zagged path to test to controller's ability to deal with turning. We started the are about 2 meters away from the path and repeated the experiment with five look-ahead distances: 0.5 m, 0.75 m, 1.0 m, 1.5 m, and 2.0 m. 
 
+
 <img src="https://drive.google.com/uc?export=view&id=1vqgmXrXla73lJhIVAsMkdP3hYFUkyQGa" alt="Testing Path Image" height="300">
 **Figure 2.8: Pure Pursuit Testing Path**
 
 This path was designed to have an initial offset to test convergence time, a sharp turn to test response time, and a zig zag, to test noisey path performance.
+
 
 <img src="https://drive.google.com/uc?export=view&id=1K864BXGs_ZxUdKpudf_kPYWV-T30jNaH" alt="Path" height="300">
 **Figure 2.9: Initial Offset Error**
 
 The convergence time was much smaller on the trial with 0.5 meters of lookahead, but it also had a larger overshoot than the 2 meter lookahead trial. 
 
+
 <img src="https://drive.google.com/uc?export=view&id=1futF-wl7NFcB0QFNwpwoAf0sbJZ3IIQ2" alt="Path" height="300">
 **Figure 2.10: Sharp Turn Error**
+
 
 Both the 0.5 meter and 2 meter lookahead trials had large errors compared to the 1 meter trial. The large lookahead tries to smooth the curve out approximating it as a gradual curve leading to a large, long lasting error. The short lookahead reacts to the curve too late and the car cannot physically turn sharp enough to follow the desired trajectory. 1 meter of look ahead balances these two effects well. 
 
