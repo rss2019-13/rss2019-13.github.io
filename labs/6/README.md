@@ -16,41 +16,89 @@ Once we successfully had our racecar determining efficient paths, we implemented
 ## **Proposed Approach**
 
 ### *Search Planning* (Nada)
-In order to implement a search-based path-planning algorithm, we decided to use A* search on our racecar. 
+In order to implement a search-based path-planning algorithm, we decided to use A\* search on our racecar. 
 
 Before we could do this, we needed to account for the robot’s dimensions such that it would not clip any obstacles on its edges. To do this, we dilated all obstacles on the map, such that the point representation of the robot avoiding the dilated obstacles meant that the full body of the robot would avoid the real-world obstacles successfully.
 
 <img src="https://drive.google.com/uc?export=view&id=1_FznJNFJbGu9pMNg4KvTh-57gCy-Lcs4" alt="Path" height="462" width="583">
-**Figure 1: Dilated Map**
+**Figure 1.1: Dilated Map**
 Here, the map has been dilated such that all obstacles have a bumper added to them to ensure the sides of the car do not collide with anything.
 
 Once we had a dilated map, we were able to implement a search algorithm. Once the robot receives clicked points in Rviz, it sets these points as its start and end points. From here, we set up a queue of neighbors to explore. This queue was ordered such that the closest neighbor to the current point was always listed first. 
 
-At any given iteration of A*, we looked at the closest neighbor currently in the queue. We then checked if this neighbor was within a reasonable margin of the end point. If it was, we had successfully solved the problem, and could then return the trajectory, which was then published in Rviz. 
+At any given iteration of A\*, we looked at the closest neighbor currently in the queue. We then checked if this neighbor was within a reasonable margin of the end point. If it was, we had successfully solved the problem, and could then return the trajectory, which was then published in Rviz. 
 
 If the closest neighbor, or our current node, was still too far from the goal, we expanded our search by finding all neighbors to the current node that did not interfere with an obstacle. The process for this is shown in the image below.
 
 <img src="https://drive.google.com/uc?export=view&id=1m7anzZFBixMRwIC5-cpLYWW0RIgwRMJJ" alt="Path" height="462" width="583">
-**Figure 2: Process of Finding Neighbor Nodes**
+**Figure 1.2: Process of Finding Neighbor Nodes**
 To find the neighbors of a node, our implementation had a set distance away from the current node that it looked for new nodes. The program then swept the car’s feasible turning angles, and stepped through this angle sweep at the given radius, and set those points as the new neighbor nodes to explore.
 
- We then made sure these neighbors were not interfering with the locations of the obstacles, and once they had been determined to be safe, added the neighbors to the queue to be explored on a later iteration of A*. 
+ We then made sure these neighbors were not interfering with the locations of the obstacles, and once they had been determined to be safe, added the neighbors to the queue to be explored on a later iteration of A\*. 
 
 During each round, we also updated the cost of each node. This cost was how much distance the path had taken to get to some node in the trajectory. This cost was updated any time a node was reached in a shorter distance than we had initially set its cost to be. In this way, we were able to ensure a shortest path would be found by this algorithm. 
 
 <img src="https://drive.google.com/uc?export=view&id=1CecYPDg6d_jOoD1XM-EUUR1p70w17WnQ" alt="Path" height="462" width="583">
-**Figure 3: Path Found Using A***
+**Figure 1.3: Path Found Using A\***
 Here, the trajectory that the algorithm found is seen as a blue line on the map, and the nodes that were explored to reach this trajectory are marked as green points along the way. 
 
 
 ## *Sample Planning*
-### *RRT* ()
+### *RRT* (Mia)
 
-###*RRT star* ()
-Because RRT does not produce optimal paths, we used the RRT* modification. RRT* samples points in the same way as RRT, but after it checks that there are no obstacles to the newly added point, RRT* checks if there is a better way to connect the nodes of the tree. It does this by looping through the nodes within a certain radius of the new node and finding which of these nodes gives the shortest obstacle free path to the new node. Then RRT* checks if any other nodes can be reconnected through the new node to make the path leading up to them shorter.
+We chose to implement Rapidly-exploring Random Tree (RRT) for our sample based planner. RRT works by building a tree of viable paths through the state space. RRT samples a point within the state space.
+
+<img src=”https://drive.google.com/uc?export=view&id=150NqzO_jKj6QjyNkfUj-I25zsY1MpCYP” alt=”sample point” height=”301” width=”535”>
+
+**Figure 2.1: RRT Samples a the State Space**
+
+Then RRT uses a steering function to find the point the car would reach if it drove toward the sampled point from its closest graph neighbor for a specified distance.
+
+<img src=”https://drive.google.com/uc?export=view&id=1qbbPZrQpXJbRDb6iJGPIgWwh2r3pCBAf” alt=”steering function” height=”301” width=”541”>
+
+**Figure 2.2: Steering Function Finds New Node Location**
+
+Then if there are no obstacles from the neighbor to the new node, RRT will add the node to the graph with the neighbor as its parent.
+
+<img src=”https://drive.google.com/uc?export=view&id=1ly1Is-I8DhnAVUDqg0_4-prILTy4HOmK” alt=”steering function” height=”298” width=”534”>
+
+**Figure 2.3: Connecting the New Node to the Graph**
+
+After a specified number of iterations, RRT will sample in the goal region. This will make the tree reach the goal faster. Once the tree has reached the goal, the path is extracted by tracing back from the node in the goal.
+
+<img src=”https://drive.google.com/uc?export=view&id=1GkPBMY7bqKgEeRegpm6J5uJ4dpk67OkF” alt=”find path” height=”302” width=”535”>
+
+**Figure 2.4: Path Found by RRT**
+
+
+###*RRT\** (Mia)
+Because RRT does not produce optimal paths, we used the RRT* modification, which checks for the most optimal way to connect the tree after each point is added.
+
+RRT* follows the same steps to find new endpoints.
+
+<img src=“https://drive.google.com/uc?export=view&id=12xej78auriIDwV_VBAyI8nGbMYSiWyOI” alt=“New Node RRT*” height=”535” width=”869”>
+
+**Figure 2.5: New RRT* Node**
+
+RRT* then looks within a search radius for the node to connect the new endpoint to such that the cost to the endpoint is minimized, checking that there are no obstacles in the way. 
+
+<img src=”https://drive.google.com/uc?export=view&id=12xej78auriIDwV_VBAyI8nGbMYSiWyOI” alt=”Best neighbor RRT*” height=”562” width=”863”>
+
+**Figure 2.6: Connecting the New Node**
+
+RRT* then checks if there are any nodes within the radius that could be reached at lower cost through the new node than through its previous parent node without any obstacles in the way.
+
+<img src=”https://drive.google.com/open?id=1d9XNlanDUGKS4Edmz7OvkJHU61jcjLtR” alt=”Rewiring the Tree” height=”602” width=”918”>
+
+**Figure 2.7: Rewiring the Tree**
+
+
 
 ##*Pure Pursuit* (Eric)
-Now that we have a path from where the robot is to where we want it to be, we need to program the robot to follow that path. 
+Now that we have a path from where the robot is to where we want it to be, we need to program the robot to follow that path. The approach we decided on is called pure pursuit. The robot knows its location relative to the path. The first step is to draw a circle around the car called the look-ahead circle. The radius of this circle, called the look-ahead distance, is the main factor to adjust how well the controller works. The location where the lookahead circle intersects the line is the drive point. It is possible that there is more than one point of intersection between the circle and the path. Our approach takes the point furthest along the path to be the drive point. 
+	Once the drive point is found the car’s steering angle is adjusted so that it will meet up with the drive point. As the car moves so does the lookahead circle. This means the drive point is constantly moving along the path as well. With a well tuned look-ahead distance this is a very simple and effective approach for following a path. 
+To find this optimal look-ahead value we set the car’s speed to 1.5 meters per second. We found this to work well with localization. Then we made a test trajectory with a sharp corner and a zig-zagged path to test to controller’s ability to deal with turning. We started the are about 2 meters away from the path and repeated the experiment with five look-ahead distances: 0.5 m, 0.75 m, 1.0 m, 1.5 m, and 2.0 m. 
+
 
 
 ## **Experimental Evaluation**
@@ -70,25 +118,43 @@ Here, the algorithm successfully finds an optimal path to drive around a loop in
 However, it took a lot of time to come up with the path using this method. This implementation took about a minute of set up time in order to find all the obstacles in the map. Afterwards, it could find some paths within a few seconds, and others could take up to two minutes to compute. 
 
 <img src="https://drive.google.com/uc?export=view&id=1ivyzZRbTb2qM3w_XTYBvHqG1g7Egi7p0" alt="Path" height="462" width="583">
-**Figure 5: Fast Path**
+**Figure 3.1: Fast Path**
 Sometimes the path was found very quickly. This path was found in 10.2 seconds. 
 
 
 <img src="https://drive.google.com/uc?export=view&id=1p6uq9Lv0PSXrp2kyNfwtxET5ZNvNDF0D" alt="Path" height="462" width="583">
-**Figure 5: Slow Path**
+**Figure 3.2: Slow Path**
 Other paths took a very long time to compute, such as this one. This path took 200 seconds to compute, and had to search through many nodes before it found it. This is seen in how much more dense the explored nodes marker (shown in green) appears, compared to the previous path.  
 
 
 ### *Sample Planning* 
 
-The sample planner is able to generate acceptable paths that the car can follow successfully in significantly less time than the search planner. Though these paths are not guaranteed to be the optimal route as is the case for the search planner, the use of RRT* for the path planning algorithm means that the generated paths are typically shorter than they would with traditional RRT. It also allows for a tradeoff between calculation time and path length, because RRT* has parameters that can be changed to produce better paths given more time. 
+The sample planner is able to generate acceptable paths that the car can follow successfully in significantly less time than the search planner. Though these paths are not guaranteed to be the optimal route as is the case for the search planner, the use of RRT\* for the path planning algorithm means that the generated paths are typically shorter than they would with traditional RRT. It also allows for a tradeoff between calculation time and path length, because RRT\* has parameters that can be changed to produce better paths given more time. 
 
-For routes between most points in the Stata basement map, the sample planner is able to find a path in well under a minute
+To understand how different values of neighbor radius impact the computation time of RRT* and the resulting path, tests were run on two different courses with different values and results collected. Each point represents the average result of five runs with the specified neighbor radius. 
+
+<img src=”https://drive.google.com/uc?export=view&id=1pyxsXIVd0VTfEmnFrKZ2hQlQw0caN_76” alt=”RRT Neighbor radius comparison for ” height=”366” width=”597”>
+**Figure 4.1: Different values of RRT\* neighbor radius on a long, simple path**
+
+<img src=”https://drive.google.com/uc?export=view&id=1X-ai7mpdqFqNE4vK9mv7nc72WjuCv6JG” alt=”RRT Neighbor radius comparison for ” height=”370” width=”600”>
+**Figure 4.2: Different values of RRT\* neighbor radius on a short, obstacle-filled path**
+
+These results show that computation time and path length are strongly related through the neighbor radius. Path length quickly approaches a minimum, pseudo-optimal value while computation time increases quickly with neighbor radius. Based on these results, we picked a neighbor radius of three because it produces close to the optimal path while saving significant time when compared to higher radii. 
+
+
+<img src=”https://drive.google.com/uc?export=view&id=1mRNa2m4dR9J7Qdn5heqygL--PmLGwxfb” alt=”RRT vs RRT*” height=”540” width=”960”>
+
+**Figure 4.3: Comparison of calculation times and paths between RRT* parameter settings**
+
+
+
 
 
 ### *On the Racecar*
 
+Our pure pursuit controller is able to follow the paths generated by our RRT\* implementation smoothly. It is able to stay on the paths without significant oscillations, and can take tight corners without losing its position.
+
 ## **Lessons Learned**
 
-
+The biggest thing we took away from this lab is that we need to refine the localization method. 
 
