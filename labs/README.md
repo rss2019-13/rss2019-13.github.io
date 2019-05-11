@@ -12,4 +12,4 @@
 [Lab 6           : Motion Planning and Trajectory Following](6)
 
 
-[Final Challenge : MY CHOSEN CHALLENGE](7)
+[Final Challenge : Fast Obstacle Avoidance](final)
