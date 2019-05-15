@@ -2,9 +2,6 @@
 
 Our briefing slides can be found [here](https://docs.google.com/presentation/d/e/2PACX-1vSekBXbRD01jhey_eg-2L4vt1B33mCh0rY9d0mkfi_EToSflpEm3nEaTdERE42kCxp2E9qdc8IwDWxN/embed?start=false&loop=false&delayms=3000).
 
-
-The RSS Final Challenge includes two components. The first is a race around a loop in the Stata Center basement, which directly builds on components developed in labs 5 and 6. The other challenge is fast obstacle avoidance, which requires the robot to quickly navigate a randomly-generated course that it does not have a map for. This report will focus on the second challenge.
-
 ##*Fast Obstacle Avoidance*##
 
 ###*Overview (Andrew)*###
@@ -50,7 +47,8 @@ The controller in this case is proportional controller to the drive angle. The c
 ####*Tuning (Mia)*####
 
 To improve the performance of our solution, we changed the values of both the maximum obstacle detection radius and the angle controller's proportional gain. Our goal while tuning these parameters was to allow the car to navigate cluttered, complicated courses at high speeds. We found this optimization to be more complicated than in previous labs, because the best values seemed to shift with the exact setup of the course. Even when we chose to optimize for a single course, we found that changing the parameters to allow it to navigate the end of the course more effectively would sometimes lead to it failing to navigate the beginning, or to take a different enough path through the start of the course that it would require a different tuning in the end. 
-</br>
+
+<br>
 <iframe src="https://giphy.com/embed/dXL2XsFDAnHcsuh5vN" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 **Figure 2.1: Lookahead is 1 meter, at this lookahead the robot does not anticipate enough to avoid the obstacles.**
 
@@ -78,9 +76,9 @@ To improve the performance of our solution, we changed the values of both the ma
 
 
 The videos above demonstrate the cars performance in various types of courses varying from sparse obstacles, to a slalom, to densely packed obstacles. During the demo day we were able to complete the courses at the following speeds.
-
+<br>
 **Table 1: Drive Speed for Each Course Successfully Completed on Demo Day**
-</br>
+
 <img src="https://drive.google.com/uc?export=view&id=1fkCsD8pH_LXnvqlT0GA9uBFtqLf2Y1-J" alt="Enlarged Obstacles" height="233" width="590">
 
 
