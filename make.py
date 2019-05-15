@@ -4,7 +4,7 @@ import os
 import mistune
 
 TEAM_NUMBER = "13"
-VIDEO_LINK = "https://www.youtube.com/watch?v=plGFm6q87Uw"
+VIDEO_LINK = "https://www.youtube.com/watch?v=Abr3qdu8aW0"
 
 def parse_readme(directory):
     # Make sure there is a readme file
