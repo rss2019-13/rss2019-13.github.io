@@ -54,6 +54,7 @@ To improve the performance of our solution, we changed the values of both the ma
 <iframe src="https://giphy.com/embed/dXL2XsFDAnHcsuh5vN" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 **Figure 2.1: Lookahead: 1 meter**
 
+
 lookahead 1.5m
 143122
 
@@ -66,17 +67,20 @@ lookahead 2m
 sparser
 200225
 
-slalom
-143831
 
-more dense
-img_9171
+<iframe src="https://giphy.com/embed/l041g8JpHQU2EZp1n5" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+**Figure 3.2: Slalom course**
+
+
+<iframe src="https://giphy.com/embed/Sr3PR5z7KGELaIyvo0" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+**Figure 3.3: Denser course**
+
 
 The videos above demonstrate the cars performance in various types of courses varying from sparse obstacles, to a slalom, to densely packed obstacles. During the demo day we were able to complete the courses at the following speeds.
 
 **Table 1: Drive Speed for Each Course Successfully Completed on Demo Day**
 
-<img src="https://drive.google.com/uc?export=view&id=1fkCsD8pH_LXnvqlT0GA9uBFtqLf2Y1-J" alt="Enlarged Obstacles" height="233" width="590">
+<img src="https://drive.google.com/uc?export=view&id=1fkCsD8pH_LXnvqlT0GA9uBFtqLf2Y1-J" alt=”Enlarged Obstacles" height="233" width="590">
 
 
 ###*Conclusion (Andrew)*###
