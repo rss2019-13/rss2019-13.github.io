@@ -1,7 +1,10 @@
 ##**RSS Final Challenges**##
+<<<<<<< HEAD
 
 Our briefing slides can be found [here](https://docs.google.com/presentation/d/e/2PACX-1vSekBXbRD01jhey_eg-2L4vt1B33mCh0rY9d0mkfi_EToSflpEm3nEaTdERE42kCxp2E9qdc8IwDWxN/embed?start=false&loop=false&delayms=3000).
 
+=======
+>>>>>>> 4bc614aa7b951da4297dd24a87e0656b41c987e7
 The RSS Final Challenge includes two components. The first is a race around a loop in the Stata Center basement, which directly builds on components developed in labs 5 and 6. The other challenge is fast obstacle avoidance, which requires the robot to quickly navigate a randomly-generated course that it does not have a map for. This report will focus on the second challenge.
 
 ##**The Race**##
@@ -16,6 +19,7 @@ For this final challenge, our racecar needed to be able to successfully navigate
 
 ###*Proposed Approach*###
 
+<<<<<<< HEAD
 ####*Obstacle Identification (Nada)*####
 We used the racecar’s LIDAR data to process the obstacles around it in real time. To do this, at every time step we took in the LIDAR data that the car was seeing. From here, we looked only at the angle sweep in front of the robot, which was from -pi/2 radians to pi/2 radians. This allowed us to only consider obstacles that could potentially get in the way of the car in the future, rather than anything it had already passed. 
 
@@ -34,6 +38,20 @@ Then we expanded the angle sweep by the width of the car such that the car would
 Here, the obstacles have been dilated by the width of the car. The initial obstacle size is denoted here by red markers, and the enlarged obstacles are in green.
 
 We then added this enlarged obstacle in a tuple of the form (center, width, radial distance) to an obstacle list, and visualized each obstacle in RViz using markers. 
+=======
+####*Obstacle Identification*####
+We used the racecar’s LIDAR data to process the obstacles around it in real time. To do this, at every time step we took in the LIDAR data that the car was seeing. From here, we looked only at the angle sweep in front of the robot, which was from -pi/2 radians to pi/2 radians. This allowed us to only consider obstacles that could potentially get in the way of the car in the future, rather than anything it had already passed. 
+
+We then stepped through the angle sweep at the angle increment that the LIDAR used to create the laserscan data. We set a lookahead distance such that we were only considering obstacles that were within 1 meter of the robot. 
+
+From here, in order to find each distinct obstacle, we decided that any continuous angle sweep that was within the lookahead distance would count as a single obstacle. We then took note of the start and end of the obstacle in terms of the angle that it was located at, as well as the radial distance that it was located with respect to the racecar. Then we expanded the angle sweep by the width of the car such that the car would not cut too close that it would clip the obstacles.
+
+[photo of obstacle enlarging]
+
+We then added this obstacle in a tuple of the form (center, width, radial distance) to an obstacle list, and visualized each obstacle in RViz using markers. 
+
+[photo of RViz obstacles detected]
+>>>>>>> 4bc614aa7b951da4297dd24a87e0656b41c987e7
 
 We then passed the generated obstacle list to our gap selection module, so that we could decide the best direction for the car to drive in order to avoid obstacles and continue navigating towards the goal.
 
