@@ -51,7 +51,7 @@ The controller in this case is proportional controller to the drive angle. The c
 
 To improve the performance of our solution, we changed the values of both the maximum obstacle detection radius and the angle controller's proportional gain. Our goal while tuning these parameters was to allow the car to navigate cluttered, complicated courses at high speeds. We found this optimization to be more complicated than in previous labs, because the best values seemed to shift with the exact setup of the course. Even when we chose to optimize for a single course, we found that changing the parameters to allow it to navigate the end of the course more effectively would sometimes lead to it failing to navigate the beginning, or to take a different enough path through the start of the course that it would require a different tuning in the end. 
 
-<iframe src="https://giphy.com/embed/dXL2XsFDAnHcsuh5vN" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen>
+<iframe src="https://giphy.com/embed/dXL2XsFDAnHcsuh5vN" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 **Figure 2.1: Lookahead: 1 meter**
 
 lookahead 1.5m
@@ -76,7 +76,7 @@ The videos above demonstrate the cars performance in various types of courses va
 
 **Table 1: Drive Speed for Each Course Successfully Completed on Demo Day**
 
-<img src="https://drive.google.com/uc?export=view&id=1fkCsD8pH_LXnvqlT0GA9uBFtqLf2Y1-J" alt=”Enlarged Obstacles" height="233" width="590">
+<img src="https://drive.google.com/uc?export=view&id=1fkCsD8pH_LXnvqlT0GA9uBFtqLf2Y1-J" alt="Enlarged Obstacles" height="233" width="590">
 
 
 ###*Conclusion (Andrew)*###
