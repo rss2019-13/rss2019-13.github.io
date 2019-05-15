@@ -47,10 +47,10 @@ The gap selector is a function that receives a list of obstacles and a goal and 
 The controller in this case is proportional controller to the drive angle. The car keeps a constant speed, with the exception of slowing down if it sees no gaps.
 
 ###*Experimental Evaluation*###
-####*Tuning*####
+####*Tuning (Mia)*####
 
 To improve the performance of our solution, we changed the values of both the maximum obstacle detection radius and the angle controller's proportional gain. Our goal while tuning these parameters was to allow the car to navigate cluttered, complicated courses at high speeds. We found this optimization to be more complicated than in previous labs, because the best values seemed to shift with the exact setup of the course. Even when we chose to optimize for a single course, we found that changing the parameters to allow it to navigate the end of the course more effectively would sometimes lead to it failing to navigate the beginning, or to take a different enough path through the start of the course that it would require a different tuning in the end. 
-
+</br>
 <iframe src="https://giphy.com/embed/dXL2XsFDAnHcsuh5vN" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 **Figure 2.1: Lookahead is 1 meter, at this lookahead the robot does not anticipate enough to avoid the obstacles.**
 
@@ -80,7 +80,7 @@ To improve the performance of our solution, we changed the values of both the ma
 The videos above demonstrate the cars performance in various types of courses varying from sparse obstacles, to a slalom, to densely packed obstacles. During the demo day we were able to complete the courses at the following speeds.
 
 **Table 1: Drive Speed for Each Course Successfully Completed on Demo Day**
-
+</br>
 <img src="https://drive.google.com/uc?export=view&id=1fkCsD8pH_LXnvqlT0GA9uBFtqLf2Y1-J" alt="Enlarged Obstacles" height="233" width="590">
 
 
