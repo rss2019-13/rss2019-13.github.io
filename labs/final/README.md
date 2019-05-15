@@ -27,7 +27,7 @@ Here, the racecar has looked at the LIDAR data within a specified lookahead dist
 Then we expanded the angle sweep by the width of the car such that the car would not cut too close that it would clip the obstacles.
 
 
-<img src="https://drive.google.com/uc?export=view&id=1YKFQUuJhjK2Ive3knsb67nto8BX8Hul-" alt=”Enlarged Obstacles" height="462" width="583">
+<img src="https://drive.google.com/uc?export=view&id=1YKFQUuJhjK2Ive3knsb67nto8BX8Hul-" alt="Enlarged Obstacles" height="462" width="583">
 **Figure 1.2: Enlarged Obstacles**
 Here, the obstacles have been dilated by the width of the car. The initial obstacle size is denoted here by red markers, and the enlarged obstacles are in green.
 
