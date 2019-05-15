@@ -52,28 +52,29 @@ The controller in this case is proportional controller to the drive angle. The c
 To improve the performance of our solution, we changed the values of both the maximum obstacle detection radius and the angle controller's proportional gain. Our goal while tuning these parameters was to allow the car to navigate cluttered, complicated courses at high speeds. We found this optimization to be more complicated than in previous labs, because the best values seemed to shift with the exact setup of the course. Even when we chose to optimize for a single course, we found that changing the parameters to allow it to navigate the end of the course more effectively would sometimes lead to it failing to navigate the beginning, or to take a different enough path through the start of the course that it would require a different tuning in the end. 
 
 <iframe src="https://giphy.com/embed/dXL2XsFDAnHcsuh5vN" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-**Figure 2.1: Lookahead: 1 meter**
+**Figure 2.1: Lookahead is 1 meter, at this lookahead the robot does not anticipate enough to avoid the obstacles.**
 
 
-lookahead 1.5m
-143122
+<iframe src="https://giphy.com/embed/VeeQ9yPyFc5KruHm20" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+**Figure 2.1: Lookahead is 1.5 meters, at this lookahead the robot makes it through the course.**
 
-lookahead 2m
-142722
+
+<iframe src="https://giphy.com/embed/W50tTnuJ3YvLb3wRx4" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+**Figure 2.1: Lookahead is 2 meters. In this case the robot sees its entire field of view as an obstacle and therefore gets stuck.**
 
 
 ####*Final Results (Mia)*####
 
-sparser
-200225
+<iframe src="https://giphy.com/embed/h8xmTeYZkT9xZyTlQM" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+**Figure 3.1: Sparse course at 1.5 m/s**
 
 
 <iframe src="https://giphy.com/embed/l041g8JpHQU2EZp1n5" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-**Figure 3.2: Slalom course**
+**Figure 3.2: Slalom course at 2 m/s**
 
 
 <iframe src="https://giphy.com/embed/Sr3PR5z7KGELaIyvo0" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-**Figure 3.3: Denser course**
+**Figure 3.3: Dense course at 1 m/s**
 
 
 The videos above demonstrate the cars performance in various types of courses varying from sparse obstacles, to a slalom, to densely packed obstacles. During the demo day we were able to complete the courses at the following speeds.
